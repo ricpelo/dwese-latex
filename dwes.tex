@@ -1,0 +1,192 @@
+\documentclass[a4paper,11pt]{memoir}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{bera}
+\usepackage{mathpazo}
+\usepackage{eulervm}
+%\usepackage{lmodern}
+%\usepackage{textcomp}
+\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage[pdftex]{color,graphicx}
+\usepackage[minted,skins,breakable]{tcolorbox}
+\usepackage[pdftex,unicode,colorlinks]{hyperref}
+
+\chapterstyle{veelo}
+
+\title{Prueba}
+\author{Yo}
+
+\newtcblisting[auto counter,number within=section]{php}[1]{%
+    listing engine=minted,%minted style=colorful,
+    minted language=php,minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
+    colback=blue!5!white,colframe=red!75!black,listing only,breakable,
+    left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} #1,
+    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+
+\begin{document}
+
+\frontmatter
+
+%\maketitle
+\tableofcontents
+
+\chapter{Agradecimientos}
+
+\mainmatter
+
+\part{hola}
+
+\chapter{Introducción}
+
+\section{Prueba}
+
+El 1\sptext{er} patio \tcbox[nobeforeafter, tcbox raise base]{hola} de mi$\sim$ casa.
+
+Es <<particular>>, y cuando llueve se moja como los demás. kjshdfjsk hdfjk \thefigure{} sdjkf sjkd fjskd fjskd fjk sdjkf hsdjkf sjkd fjsk fjskd fks.
+
+El 1\sptext{er} patio de mi$\sim$ casa es <<particular>>, y cuando llueve se moja como los demás. kjshdfjsk hdfjk \thefigure{} sdjkf sjkd fjskd fjskd fjk sdjkf hsdjkf sjkd fjsk fjskd fks.
+
+\begin{php}{Prueba}
+echo "hola"; echo $x; echo $x;
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+echo "hola";
+
+\end{php}
+
+\begin{itemize}
+  \item pepe
+  \item juan
+  \item manolo
+  \begin{itemize}
+    \item pepe
+  \end{itemize}
+\end{itemize}
+
+
+\chapter{Otro capítulo}
+
+dfsfsdf
+
+\end{document}
