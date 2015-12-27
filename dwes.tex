@@ -6,17 +6,18 @@
 \usepackage{eulervm}
 %\usepackage{lmodern}
 %\usepackage{textcomp}
-\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \usepackage[pdftex]{color,graphicx}
 \usepackage[minted,skins,breakable]{tcolorbox}
 \usepackage[pdftex,unicode,colorlinks]{hyperref}
+\usepackage{lipsum}
 
 \chapterstyle{veelo}
 
 \title{Prueba}
 \author{Yo}
 
-\newtcblisting[auto counter,number within=section]{php}[1]{%
+\newtcblisting[auto counter,number within=section]{php}[1]{
     listing engine=minted,%minted style=colorful,
     minted language=php,minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
     colback=blue!5!white,colframe=red!75!black,listing only,breakable,
@@ -41,138 +42,16 @@
 
 \section{Prueba}
 
-El 1\sptext{er} patio \tcbox[nobeforeafter, tcbox raise base]{hola} de mi$\sim$ casa.
-
-Es <<particular>>, y cuando llueve se moja como los demás. kjshdfjsk hdfjk \thefigure{} sdjkf sjkd fjskd fjskd fjk sdjkf hsdjkf sjkd fjsk fjskd fks.
-
-El 1\sptext{er} patio de mi$\sim$ casa es <<particular>>, y cuando llueve se moja como los demás. kjshdfjsk hdfjk \thefigure{} sdjkf sjkd fjskd fjskd fjk sdjkf hsdjkf sjkd fjsk fjskd fks.
+\lipsum
 
 \begin{php}{Prueba}
-echo "hola"; echo $x; echo $x;
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-echo "hola";
-
+class Articulos extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('articulos/index');
+    }
+}
 \end{php}
 
 \begin{itemize}
