@@ -20,6 +20,7 @@
 \newtcblisting[auto counter,number within=section]{php}[1]{
     listing engine=minted,%minted style=colorful,
     minted language=php,minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
+    listing file=\thetcbcounter.php,
     colback=blue!5!white,colframe=red!75!black,listing only,breakable,
     left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} #1,
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
