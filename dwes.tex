@@ -23,7 +23,7 @@
 
 % Macro que define una plantilla para crear cajas de listados de código:
 \newcommand{\mitcb}[5]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#2}} O{} }{%
+\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#2}} O{} }{
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
@@ -31,12 +31,13 @@
     run system command={./linter.sh #3 \thetcbcounter},
     colback=blue!5!white,
     colframe=red!75!black,
+    fonttitle=\large\bfseries,
     listing only,
     #4,
     left=8mm,
     enhanced,
     ##2,
-    title=\textbf{Listado~\thetcbcounter: \href{code/\thetcbcounter.#2}{##1}},
+    title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#2}{##1},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
@@ -53,12 +54,13 @@
     run system command={./linter.sh #2 ##3},
     colback=blue!5!white,
     colframe=red!75!black,
+    fonttitle=\large\bfseries,
     listing only,
     #4,
     left=8mm,
     enhanced,
     ##2,
-    title=\textbf{Listado~\thetcbcounter: \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}}},
+    title=Listado~\thetcbcounter: \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
@@ -84,6 +86,16 @@
 \miitcb{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
 \miitcb{\ihtmlphp}{htmlphp}{html+php}{}{}
 
+\DeclareTotalTColorBox{\cajainfo}{ s O{} O{hint} m }
+    {center,width=0.9\linewidth,fonttitle=\large\bfseries,
+     IfBooleanTF={#1}
+         {colback=green!5}%
+         {bicolor,sidebyside,lefthand width=3cm,colback=green!50!black!50,
+          colbacklower=green!5},
+     #2}
+    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#3}\tcblower}%
+     \small{#4}}
+
 \begin{document}
 
 \frontmatter
@@ -100,6 +112,8 @@
 \chapter{Introducción}
 
 \section{Prueba}
+
+\cajainfo[title=Prueba]{\lipsum[1]}
 
 \lipsum
 
