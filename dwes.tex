@@ -17,12 +17,12 @@
 \title{Prueba}
 \author{Yo}
 
-\newtcblisting[auto counter,number within=section]{php}[1]{
+\newtcblisting[auto counter,number within=section]{php}[1][\url{\thetcbcounter.php}]{
     listing engine=minted,%minted style=colorful,
     minted language=php,minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
     listing file=\thetcbcounter.php,
     colback=blue!5!white,colframe=red!75!black,listing only,breakable,
-    left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} #1,
+    left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} \href{\thetcbcounter.php}{#1},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
 
@@ -45,7 +45,7 @@
 
 \lipsum
 
-\begin{php}{Prueba}
+\begin{php}[Prueba]
 class Articulos extends CI_Controller
 {
     public function index()
