@@ -35,7 +35,7 @@
     #4,
     left=8mm,
     enhanced,
-    label=##2,
+    ##2,
     title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.#2}{##1},
     before title={\hypersetup{urlcolor=blue}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
@@ -69,7 +69,7 @@
     #4,
     left=8mm,
     enhanced,
-    label=##2,
+    ##2,
     title=\textbf{Listado~\thetcbcounter:} \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}},
     before title={\hypersetup{urlcolor=blue}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
@@ -193,7 +193,7 @@
 
 \lipsum
 
-\begin{htmlphp}[Prueba][etiqueta]
+\begin{htmlphp}[Prueba][label=etiqueta]
 <html>
     <body><?php
         class Articulos extends CI_Controller
@@ -228,7 +228,7 @@ class Articulos extends CI_Controller
   \end{itemize}
 \end{itemize}
 
-\ihtmlphp[louili][otra]{index.php}
+\ihtmlphp[louili][label=otra]{index.php}
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
