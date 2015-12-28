@@ -50,9 +50,7 @@
 % #5 : Opciones adicionales para minted
 
 \mitcb{php}{php}{php}{}{startinline}
-\mitcb{lphp}{php}{php}{breakable}{startinline}
 \mitcb{htmlphp}{php}{html+php}{}{}
-\mitcb{lhtmlphp}{php}{html+php}{breakable}{}
 
 % Macro que define una plantilla para crear listados de código que se cargan desde
 % un archivo:
@@ -84,9 +82,7 @@
 % #5 : Opciones adicionales para minted
 
 \miitcb{\iphp}{iphp}{php}{}{startinline}
-\miitcb{\ilphp}{iphp}{php}{breakable}{startinline}
 \miitcb{\ihtmlphp}{ihtmlphp}{html+php}{}{}
-\miitcb{\ilhtmlphp}{ihtmlphp}{html+php}{breakable}{}
 
 \begin{document}
 
@@ -107,7 +103,7 @@
 
 \lipsum
 
-\begin{htmlphp}[Prueba][label=etiqueta]
+\begin{htmlphp}[Prueba][label=etiqueta,breakable]
 <html>
     <body><?php
         class Articulos extends CI_Controller
@@ -119,11 +115,88 @@
         } ?>
     </body>
 </html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
+<html>
+<body><?php
+class Articulos extends CI_Controller
+{
+public function index()
+{
+$this->load->view('articulos/index');
+}
+} ?>
+</body>
+</html>
 \end{htmlphp}
 
 El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
 
-\begin{htmlphp}[Otra prueba]
+\begin{php}[Otra prueba]
 class Articulos extends CI_Controller
 {
     public function index()
@@ -131,7 +204,7 @@ class Articulos extends CI_Controller
         $this->load->view('articulos/index');
     }
 }
-\end{htmlphp}
+\end{php}
 
 \begin{itemize}
   \item pepe
