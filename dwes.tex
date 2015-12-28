@@ -24,6 +24,7 @@
     run system command={./linter.sh php \thetcbcounter},
     colback=blue!5!white,colframe=red!75!black,listing only,breakable,
     left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
+    before title={\hypersetup{urlcolor=blue}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
              rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
 
