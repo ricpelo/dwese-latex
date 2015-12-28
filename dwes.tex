@@ -17,14 +17,17 @@
 \title{Prueba}
 \author{Yo}
 
-\newtcblisting[auto counter,number within=section]{php}[1][\url{\thetcbcounter.php}]{
+\makeatletter
+\newtcblisting[auto counter,number within=section]{php}[1][\url{code/\thetcbcounter.php}]{
     listing engine=minted,%minted style=colorful,
     minted language=php,minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-    listing file=\thetcbcounter.php,
+    listing file=code/\thetcbcounter.php,
+    run system command={./linter.sh \thetcbcounter},
     colback=blue!5!white,colframe=red!75!black,listing only,breakable,
-    left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} \href{\thetcbcounter.php}{#1},
+    left=8mm,enhanced,title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+\makeatother
 
 \begin{document}
 
@@ -37,7 +40,7 @@
 
 \mainmatter
 
-\part{hola}
+\part{Conceptos básicos}
 
 \chapter{Introducción}
 
