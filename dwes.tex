@@ -17,24 +17,23 @@
 \title{Prueba}
 \author{Yo}
 
-%\def\mitcb #1#2#3#4#5{%%
 \newcommand{\mitcb}[5]{%
-\newtcblisting[auto counter,number within=section]{#1}[1][\url{code/\thetcbcounter.#2}]{%
-    listing engine=minted,%
-    minted language=#3,%
-    minted options={fontsize=\small,linenos,numbersep=3mm,#5},%
-    listing file=code/\thetcbcounter.#2,%
-    run system command={./linter.sh #3 \thetcbcounter},%
-    colback=blue!5!white,%
-    colframe=red!75!black,%
-    listing only,%
-    #4,%
-    left=8mm,%
-    enhanced,%
-    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.#2}{##1},%
-    before title={\hypersetup{urlcolor=blue}},%
-    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)%
-            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}%
+\newtcblisting[auto counter,number within=section]{#1}[1][\url{code/\thetcbcounter.#2}]{
+    listing engine=minted,
+    minted language=#3,
+    minted options={fontsize=\small,linenos,numbersep=3mm,#5},
+    listing file=code/\thetcbcounter.#2,
+    run system command={./linter.sh #3 \thetcbcounter},
+    colback=blue!5!white,
+    colframe=red!75!black,
+    listing only,
+    #4,
+    left=8mm,
+    enhanced,
+    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.#2}{##1},
+    before title={\hypersetup{urlcolor=blue}},
+    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
 }
 
 % Parámetros:
@@ -43,10 +42,58 @@
 % #3 : Lenguaje para minted (o sea, el lexer para Pygmentize)
 % #4 : Opciones adicionales para \newtcblisting
 % #5 : Opciones adicionales para minted
+
 \mitcb{php}{php}{php}{}{startinline}
 \mitcb{lphp}{php}{php}{breakable}{startinline}
 \mitcb{htmlphp}{php}{html+php}{}{}
 \mitcb{lhtmlphp}{php}{html+php}{breakable}{}
+
+\newcommand{\miitcb}[5]{%
+\newtcbinputlisting[auto counter,number within=section]{#1}[2][]{
+    listing engine=minted,
+    minted language=#3,
+    minted options={fontsize=\small,linenos,numbersep=3mm,#5},
+    listing file=##2,
+    run system command={./linter.sh #2 ##2},
+    colback=blue!5!white,
+    colframe=red!75!black,
+    listing only,
+    #4,
+    left=8mm,
+    enhanced,
+    title=\textbf{Listado~\thetcbcounter:} \href{##2}{\ifthenelse{\equal{##1}{}}{##2}{##1}},
+    before title={\hypersetup{urlcolor=blue}},
+    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+}
+
+% Parámetros:
+% #1 : Nombre del comando
+% #2 : Tipo de archivo para el linter
+% #3 : Lenguaje para minted (o sea, el lexer para Pygmentize)
+% #4 : Opciones adicionales para \newtcbinputlisting
+% #5 : Opciones adicionales para minted
+
+\miitcb{\iphp}{iphp}{php}{}{startinline}
+\miitcb{\ilphp}{iphp}{php}{breakable}{startinline}
+\miitcb{\ihtmlphp}{ihtmlphp}{html+php}{}{}
+\miitcb{\ilhtmlphp}{ihtmlphp}{html+php}{breakable}{}
+
+%\newtcbinputlisting[auto counter,number within=section]{\iphp}[2][]{
+%    listing engine=minted,
+%    minted language=php,
+%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
+%    listing file=#2,
+%    run system command={./linter.sh iphp #2},
+%    colback=blue!5!white,
+%    colframe=red!75!black,
+%    listing only,
+%    left=8mm,
+%    enhanced,
+%    title=\textbf{Listado~\thetcbcounter:} \href{#2}{\ifthenelse{\equal{#1}{}}{#2}{#1}},
+%    before title={\hypersetup{urlcolor=blue}},
+%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
 
 %% Entorno para código PHP directo en cajas irrompibles (para listados cortos):
 %\newtcblisting[auto counter,number within=section]{php}[1][\url{code/\thetcbcounter.php}]{
@@ -161,6 +208,7 @@
   \end{itemize}
 \end{itemize}
 
+\ihtmlphp[louili]{index.php}
 
 \chapter{Otro capítulo}
 
