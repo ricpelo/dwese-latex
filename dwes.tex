@@ -88,92 +88,6 @@
 \miitcb{\ihtmlphp}{ihtmlphp}{html+php}{}{}
 \miitcb{\ilhtmlphp}{ihtmlphp}{html+php}{breakable}{}
 
-%\newtcbinputlisting[auto counter,number within=section]{\iphp}[2][]{
-%    listing engine=minted,
-%    minted language=php,
-%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-%    listing file=#2,
-%    run system command={./linter.sh iphp #2},
-%    colback=blue!5!white,
-%    colframe=red!75!black,
-%    listing only,
-%    left=8mm,
-%    enhanced,
-%    title=\textbf{Listado~\thetcbcounter:} \href{#2}{\ifthenelse{\equal{#1}{}}{#2}{#1}},
-%    before title={\hypersetup{urlcolor=blue}},
-%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
-
-%% Entorno para código PHP directo en cajas irrompibles (para listados cortos):
-%\newtcblisting[auto counter,number within=section]{php}[1][\url{code/\thetcbcounter.php}]{
-%    listing engine=minted,
-%    minted language=php,
-%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-%    listing file=code/\thetcbcounter.php,
-%    run system command={./linter.sh php \thetcbcounter},
-%    colback=blue!5!white,
-%    colframe=red!75!black,
-%    listing only,
-%    left=8mm,
-%    enhanced,
-%    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
-%    before title={\hypersetup{urlcolor=blue}},
-%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
-
-%% Entorno para código PHP directo en cajas rompibles (para listados largos):
-%\newtcblisting[auto counter,number within=section]{lphp}[1][\url{code/\thetcbcounter.php}]{
-%    listing engine=minted,
-%    minted language=php,
-%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-%    listing file=code/\thetcbcounter.php,
-%    run system command={./linter.sh php \thetcbcounter},
-%    colback=blue!5!white,
-%    colframe=red!75!black,
-%    listing only,
-%    breakable,
-%    left=8mm,
-%    enhanced,
-%    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
-%    before title={\hypersetup{urlcolor=blue}},
-%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
-
-%% Entorno para código HTML+PHP directo en cajas irrompibles (para listados cortos):
-%\newtcblisting[auto counter,number within=section]{htmlphp}[1][\url{code/\thetcbcounter.php}]{
-%    listing engine=minted,
-%    minted language=html+php,
-%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-%    listing file=code/\thetcbcounter.php,
-%    run system command={./linter.sh htmlphp \thetcbcounter},
-%    colback=blue!5!white,
-%    colframe=red!75!black,
-%    listing only,
-%    left=8mm,
-%    enhanced,
-%    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
-%    before title={\hypersetup{urlcolor=blue}},
-%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
-
-%% Entorno para código HTML+PHP directo en cajas rompibles (para listados largos):
-%\newtcblisting[auto counter,number within=section]{lhtmlphp}[1][\url{code/\thetcbcounter.php}]{
-%    listing engine=minted,
-%    minted language=html+php,
-%    minted options={fontsize=\small,linenos,numbersep=3mm,startinline},
-%    listing file=code/\thetcbcounter.php,
-%    run system command={./linter.sh htmlphp \thetcbcounter},
-%    colback=blue!5!white,
-%    colframe=red!75!black,
-%    listing only,
-%    breakable,
-%    left=8mm,
-%    enhanced,
-%    title=\textbf{Listado~\thetcbcounter:} \href{code/\thetcbcounter.php}{#1},
-%    before title={\hypersetup{urlcolor=blue}},
-%    overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-%            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
-
 \begin{document}
 
 \frontmatter
@@ -228,7 +142,7 @@ class Articulos extends CI_Controller
   \end{itemize}
 \end{itemize}
 
-\ihtmlphp[louili][label=otra]{index.php}
+\ihtmlphp[][label=otra]{index.php}
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
