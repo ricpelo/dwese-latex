@@ -17,8 +17,13 @@
 \title{Prueba}
 \author{Yo}
 
+% Un tcolorbox vacío, sólo para usarlo como referencia para que las demás cajas
+% usen el mismo contador:
+\newtcolorbox[auto counter,number within=section]{contador}{}
+
+% Macro que define una plantilla para crear cajas de listados de código:
 \newcommand{\mitcb}[5]{%
-\newtcblisting[auto counter,number within=section]{#1}[1][\url{code/\thetcbcounter.#2}]{
+\newtcblisting[use counter from=contador]{#1}[1][\url{code/\thetcbcounter.#2}]{
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
@@ -48,8 +53,10 @@
 \mitcb{htmlphp}{php}{html+php}{}{}
 \mitcb{lhtmlphp}{php}{html+php}{breakable}{}
 
+% Macro que define una plantilla para crear listados de código que se cargan desde
+% un archivo:
 \newcommand{\miitcb}[5]{%
-\newtcbinputlisting[auto counter,number within=section]{#1}[2][]{
+\newtcbinputlisting[use counter from=contador]{#1}[2][]{
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
@@ -196,7 +203,16 @@
         } ?>
     </body>
 </html>
+\end{htmlphp}
 
+\begin{htmlphp}[Otra prueba]
+class Articulos extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('articulos/index');
+    }
+}
 \end{htmlphp}
 
 \begin{itemize}
