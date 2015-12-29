@@ -125,18 +125,6 @@
 \listadoinput{\iphpnoinline}{iphp}{php}{}{}
 \listadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
 
-% Una caja informativa genérica. De forma predeterminada, muestra el icono de
-% una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
-\DeclareTotalTColorBox{\caja}{ s O{} O{hint} m }
-    {center,width=0.9\linewidth,fonttitle=\large\bfseries,drop fuzzy shadow,
-     IfBooleanTF={#1}
-         {colback=green!5}%
-         {bicolor,sidebyside,lefthand width=3cm,colback=green!50!black!50,
-          colbacklower=green!5},
-     #2}
-    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#3}\tcblower}%
-     \small{#4}}
-
 % Código PHP dentro del texto:
 \DeclareTotalTCBox{\phpcode}{ s m }
 {verbatim,colback=\codigocolback,colframe=\codigocolframe,leftright skip=1mm}
@@ -147,11 +135,23 @@
 {verbatim,colupper=white,colback=black!75!white,colframe=black,leftright skip=1mm}
 {\mintinline[style=vim]{sh}{#2}}
 
-\begin{document}
+% Una caja informativa genérica. De forma predeterminada, muestra el icono de
+% una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
+\DeclareTotalTColorBox{\caja}{ s O{} O{hint} m }
+    {center,width=0.9\linewidth,fonttitle=\large\bfseries,drop fuzzy shadow,
+     IfBooleanTF={#1}
+         {colback=green!5}%
+         {bicolor,sidebyside,lefthand width=2cm,colback=green!50!black!50,
+          colbacklower=green!5},
+     #2}
+    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#3}\tcblower}%
+     \small{#4}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CUBIERTA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
 
 \frontmatter
 \pagestyle{empty}
@@ -342,8 +342,8 @@ Free Documentation License\textquotedbl{} on this book.
 
 \section{Prueba}
 
-%\caja[adjusted title=Prueba]{\lipsum[2]}
-\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
+\caja[adjusted title=Prueba]{\lipsum[2]}
+%\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
 
 \lipsum
 
