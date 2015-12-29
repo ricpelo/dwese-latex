@@ -14,6 +14,21 @@
 
 \chapterstyle{veelo}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINICIONES GENERALES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\myTitle{Desarrollo web en entorno servidor}
+\def\myVersion{Primera edición}
+\def\myTime{Enero 2016}
+\def\myName{Ricardo Pérez López}
+\title{\myTitle}
+\author{\myName}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINICIONES PARA LA PORTADA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
 
 \newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
@@ -31,8 +46,9 @@
         }}
         \endgroup}
 
-\title{Desarrollo web en entorno servidor}
-\author{Ricardo Pérez López}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINICIÓN DE CAJAS INFORMATIVAS, DE LISTADOS, ETC.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Un tcolorbox vacío, sólo para usarlo como referencia para que las demás cajas
 % usen el mismo contador:
@@ -130,15 +146,22 @@
 
 \begin{document}
 
-% Cubierta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUBIERTA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\frontmatter
 \pagestyle{empty}
+\pdfbookmark[-1]{Inicio}{Inicio}
+\pdfbookmark[0]{Portada}{Portada}
 \titleGM
 \cleardoublepage
 
-% Portada
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PORTADA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\thispagestyle{empty}
+%\thispagestyle{empty}
 \large
 \hfill
 \vfill
@@ -169,21 +192,150 @@
     \today}
 \end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Contenido
+\clearpage
 
-\frontmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LICENCIA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark[0]{Licencia}{Licencia}
+\hfill
+
+\noindent \begingroup \huge \myTitle \endgroup
+
+\medskip
+
+\noindent \myVersion, \myTime
+
+\vfill
+\textbf{\Large{Renuncia}}
+
+A pesar de todos los esfuerzos que se han realizado para preparar,
+revisar y corregir el contenido de este libro para garantizar su exactitud
+y validez de la información contenida, este libro se proporciona <<tal
+cual>>, así que el autor, así como todas las partes vinculadas
+en la edición, corrección, publicación y/o distribución de la obra
+no se hacen responsables por cualquier inexactitud o cualquier daño
+causado, ya sea directa o indirectamente, por el uso de esta información.
+
+\bigskip
+
+\indent Copyright \textcopyright\ \myTime, \myName.
+
+\bigskip
+
+\textbf{\Large{Licencia}}
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation; with
+no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+
+A copy of the license is included in the section entitled \textquotedbl{}GNU
+Free Documentation License\textquotedbl{} on this book.
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEDICATORIA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\pdfbookmark[0]{Dedicatoria}{Dedicatoria}
+
+\vspace*{3cm}
+
+\begin{center}
+    Lo que mueve más rápido al mundo, no son las locomotoras,\\
+    Sino las ideas\\
+    \medskip
+    --- \textit{Miguel de Unamuno}
+\end{center}
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AGRADECIMIENTOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark[0]{Agradecimientos}{Agradecimientos}
+\chapter*{Agradecimientos}
+\thispagestyle{empty}
+
+\lipsum[1-2]
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACERCA DEL AUTOR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark[0]{Acerca del autor}{Acerca del autor}
+\chapter*{Acerca del autor}
+\thispagestyle{empty}
+
+\lipsum[3-4]
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESUMEN DE CONTENIDO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark[0]{Resumen de contenido}{Resumen de contenido}
+\renewcommand{\contentsname}{Resumen de contenido}
+%\begingroup \huge \myTitle \endgroup
+\begingroup
+\setcounter{tocdepth}{-1}
+%\makeatletter
+\renewcommand*\cftpartindent{0em}
+\renewcommand*\cftpartnumwidth{3em}
+%\makeatother
+\begin{KeepFromToc}
+    \tableofcontents*
+\end{KeepFromToc}
+\thispagestyle{empty}
+\endgroup%
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INDICE GENERAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}
 \pagestyle{headings}
+\pdfbookmark[0]{Índice general}{Indice general}
+\renewcommand{\contentsname}{Índice general}
+
+%% TOC dimensions
+\cftsetindents{section}{2.5em}{3.0em}
+\cftsetindents{subsection}{4.5em}{3.9em}
+\cftsetindents{subsubsection}{8.4em}{4.8em}
+\cftsetindents{paragraph}{10.7em}{5.7em}
+\cftsetindents{subparagraph}{12.7em}{6.7em}
+
+\makeatletter
+\renewcommand*\cftpartindent{0em}
+\renewcommand*\cftchapterindent{1em}
+\renewcommand*\cftpartnumwidth{3em}
+\renewcommand{\l@section}{\@dottedtocline{1}{2em}{2.6em}} \renewcommand{\l@subsection}{\@dottedtocline{2}{3.8em}{3.2em}} \renewcommand{\l@subsubsection}{\@dottedtocline{3}{7.0em}{4.1em}}
+\makeatother
+\setcounter{tocdepth}{2}
 
 \tableofcontents
 
-\chapter{Agradecimientos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENIDO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \mainmatter
 
 \part{Conceptos básicos}
 
 \chapter{Introducción}
+
+\chapterprecis{Donde se habla de esto y de aquello.}
 
 \section{Prueba}
 
