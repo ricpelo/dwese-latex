@@ -39,13 +39,13 @@
 \newtcolorbox[auto counter,number within=section]{contador}{}
 
 % Macro que define una plantilla para crear cajas de listados de código:
-\newcommand{\mitcb}[5]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#2}} O{} }{
+\newcommand{\mitcb}[6]{%
+\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#6}} O{} }{
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
-    listing file=code/\thetcbcounter.#2,
-    run system command={./linter.sh #3 \thetcbcounter},
+    listing file=code/\thetcbcounter.#6,
+    run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=blue!5!white,
     colframe=red!75!black,
     fonttitle=\large\bfseries,
@@ -54,14 +54,14 @@
     left=8mm,
     enhanced,
     ##2,
-    title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#2}{##1},
+    title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
 }
 
-% Macro que define una plantilla para crear listados de código que se cargan desde
-% un archivo:
+% Macro que define una plantilla para crear cajas de listados de código
+% que se cargan desde un archivo:
 \newcommand{\miitcb}[5]{%
 \DeclareTCBInputListing[use counter from=contador]{#1}{ O{} O{} m }{%
     listing engine=minted,
@@ -85,13 +85,15 @@
 
 % Parámetros:
 % #1 : Nombre del entorno
-% #2 : Extensión del archivo resultante
+% #2 : Tipo de archivo para el linter
 % #3 : Lenguaje para minted (o sea, el lexer para Pygmentize)
 % #4 : Opciones adicionales para \newtcblisting
 % #5 : Opciones adicionales para minted
+% #6 : Extensión del archivo resultante
 
-\mitcb{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}
-\mitcb{htmlphp}{php}{html+php}{}{}
+\mitcb{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\mitcb{phpnoinline}{iphp}{php}{}{}{php}
+\mitcb{htmlphp}{htmlphp}{html+php}{}{}{php}
 
 % Parámetros:
 % #1 : Nombre del comando
@@ -101,6 +103,7 @@
 % #5 : Opciones adicionales para minted
 
 \miitcb{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
+\miitcb{\iphpnoinline}{iphp}{php}{}{}
 \miitcb{\ihtmlphp}{htmlphp}{html+php}{}{}
 
 \DeclareTotalTColorBox{\cajainfo}{ s O{} O{hint} m }
@@ -288,7 +291,7 @@ class Articulos extends CI_Controller
   \end{itemize}
 \end{itemize}
 
-\ihtmlphp[][label=otra]{index.php}
+%\ihtmlphp[][label=otra]{index.php}
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
