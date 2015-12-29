@@ -14,8 +14,25 @@
 
 \chapterstyle{veelo}
 
-\title{Prueba}
-\author{Yo}
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
+
+\newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
+    \hbox{ % Horizontal box
+        \hspace*{0.1\textwidth} % Whitespace to the left of the title page
+        \rule{1pt}{\textheight} % Vertical line
+        \hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+        \parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+            {\noindent\scalebox{1.5}{\HUGE\bfseries Desarrollo web}\\[1.5\baselineskip]%
+                \scalebox{1.5}{\HUGE\bfseries en entorno servidor}\\[2\baselineskip]}
+            {\LARGE \textsc{Ricardo Pérez López}}
+
+            \vspace{0.5\textheight} % Whitespace between the title block and the publisher
+            {\noindent\large I.E.S. Doñana \plogo}\\[\baselineskip] % Publisher and logo
+        }}
+        \endgroup}
+
+\title{Desarrollo web en entorno servidor}
+\author{Ricardo Pérez López}
 
 % Un tcolorbox vacío, sólo para usarlo como referencia para que las demás cajas
 % usen el mismo contador:
@@ -98,9 +115,51 @@
 
 \begin{document}
 
-\frontmatter
+% Cubierta
 
-%\maketitle
+\pagestyle{empty}
+\titleGM
+\cleardoublepage
+
+% Portada
+
+\thispagestyle{empty}
+\large
+\hfill
+\vfill
+
+\begin{center}
+    \color{blue}
+    \scalebox{1.5}{\HUGE{Desarrollo web en}}\\[1.3\baselineskip]\scalebox{1.5}{\Huge{entorno servidor}}
+\end{center}
+
+\bigskip
+\bigskip
+
+\begin{center}
+    {\LARGE{}Ricardo Pérez López}
+\end{center}
+
+\vfill
+\vfill
+
+%\begin{center}
+%    D.W.E.S.
+%\end{center}
+%
+%\vfill
+
+\begin{center}
+    {\Large I.E.S. Doñana\\[1.1\baselineskip]
+    \today}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contenido
+
+\frontmatter
+\pagestyle{headings}
+
 \tableofcontents
 
 \chapter{Agradecimientos}
