@@ -25,6 +25,9 @@
 \title{\myTitle}
 \author{\myName}
 
+\def\codigocolback{blue!5!white}
+\def\codigocolframe{red!75!black}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINICIONES PARA LA PORTADA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,48 +58,48 @@
 \newtcolorbox[auto counter,number within=section]{contador}{}
 
 % Macro que define una plantilla para crear cajas de listados de código:
-\newcommand{\mitcb}[6]{%
+\newcommand{\listado}[6]{%
 \DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#6}} O{} }{
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
     listing file=code/\thetcbcounter.#6,
     run system command={./linter.sh #2 \thetcbcounter.#6},
-    colback=blue!5!white,
-    colframe=red!75!black,
+    colback=\codigocolback,
+    colframe=\codigocolframe,
     fonttitle=\large\bfseries,
     listing only,
-    #4,
     left=8mm,
     enhanced,
-    ##2,
     adjusted title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
+    #4,
+    ##2}
 }
 
 % Macro que define una plantilla para crear cajas de listados de código
 % que se cargan desde un archivo:
-\newcommand{\miitcb}[5]{%
+\newcommand{\listadoinput}[5]{%
 \DeclareTCBInputListing[use counter from=contador]{#1}{ O{} O{} m }{%
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\small,linenos,numbersep=3mm,#5},
     listing file=##3,
     run system command={./linter.sh #2 ##3},
-    colback=blue!5!white,
-    colframe=red!75!black,
+    colback=\codigocolback,
+    colframe=\codigocolframe,
     fonttitle=\large\bfseries,
     listing only,
-    #4,
     left=8mm,
     enhanced,
-    ##2,
     adjusted title=Listado~\thetcbcounter: \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
-            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}}}
+            rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
+    #4,
+    ##2}
 }
 
 % Parámetros:
@@ -107,9 +110,9 @@
 % #5 : Opciones adicionales para minted
 % #6 : Extensión del archivo resultante
 
-\mitcb{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
-\mitcb{phpnoinline}{iphp}{php}{}{}{php}
-\mitcb{htmlphp}{htmlphp}{html+php}{}{}{php}
+\listado{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\listado{phpnoinline}{iphp}{php}{}{}{php}
+\listado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
 % Parámetros:
 % #1 : Nombre del comando
@@ -118,9 +121,9 @@
 % #4 : Opciones adicionales para \newtcbinputlisting
 % #5 : Opciones adicionales para minted
 
-\miitcb{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
-\miitcb{\iphpnoinline}{iphp}{php}{}{}
-\miitcb{\ihtmlphp}{htmlphp}{html+php}{}{}
+\listadoinput{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
+\listadoinput{\iphpnoinline}{iphp}{php}{}{}
+\listadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
 
 % Una caja informativa genérica. De forma predeterminada, muestra el icono de
 % una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
@@ -135,12 +138,12 @@
      \small{#4}}
 
 % Código PHP dentro del texto:
-\DeclareTotalTCBox{\phpcode}{ s v }
-{verbatim,colback=blue!5!white,colframe=red!75!black,leftright skip=1mm}
+\DeclareTotalTCBox{\phpcode}{ s m }
+{verbatim,colback=\codigocolback,colframe=\codigocolframe,leftright skip=1mm}
 {\mintinline{php}{#2}}
 
 % Comandos de consola dentro del texto:
-\DeclareTotalTCBox{\consolecode}{ s v }
+\DeclareTotalTCBox{\consolecode}{ s m }
 {verbatim,colupper=white,colback=black!75!white,colframe=black,leftright skip=1mm}
 {\mintinline[style=vim]{sh}{#2}}
 
@@ -339,7 +342,8 @@ Free Documentation License\textquotedbl{} on this book.
 
 \section{Prueba}
 
-\caja[adjusted title=Prueba]{\lipsum[1]}
+%\caja[adjusted title=Prueba]{\lipsum[2]}
+\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
 
 \lipsum
 
@@ -455,7 +459,7 @@ class Articulos extends CI_Controller
   \end{itemize}
 \end{itemize}
 
-%\ihtmlphp[][label=otra]{index.php}
+\ihtmlphp[][label=otra]{index.php}
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
