@@ -1,10 +1,10 @@
 \documentclass[a4paper,11pt]{memoir}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+%\usepackage{mathpazo}
+%\usepackage{eulervm}
+\usepackage{lmodern}
 \usepackage{bera}
-\usepackage{mathpazo}
-\usepackage{eulervm}
-%\usepackage{lmodern}
 %\usepackage{textcomp}
 \usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \usepackage[pdftex]{color,graphicx}
@@ -27,6 +27,9 @@
 
 \def\codigocolback{blue!5!white}
 \def\codigocolframe{red!75!black}
+\def\consolecolback{black!75!white}
+\def\consolecolframe{black}
+\def\consolecolprompt{orange}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINICIONES PARA LA PORTADA
@@ -37,11 +40,11 @@
 \newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
     \hbox{ % Horizontal box
         \hspace*{0.1\textwidth} % Whitespace to the left of the title page
-        \rule{1pt}{\textheight} % Vertical line
+        \rule{2pt}{\textheight} % Vertical line
         \hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
         \parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
-            {\noindent\scalebox{1.5}{\HUGE\bfseries Desarrollo web}\\[1.5\baselineskip]%
-                \scalebox{1.5}{\HUGE\bfseries en entorno servidor}\\[2\baselineskip]}
+            {\noindent\scalebox{1.7}{\HUGE\bfseries Desarrollo web}\\[1.5\baselineskip]%
+                \scalebox{1.7}{\HUGE\bfseries en entorno servidor}\\[2\baselineskip]}
             {\LARGE \textsc{Ricardo Pérez López}}
 
             \vspace{0.5\textheight} % Whitespace between the title block and the publisher
@@ -125,16 +128,6 @@
 \listadoinput{\iphpnoinline}{iphp}{php}{}{}
 \listadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
 
-% Código PHP dentro del texto:
-\DeclareTotalTCBox{\phpcode}{ s m }
-{verbatim,colback=\codigocolback,colframe=\codigocolframe,leftright skip=1mm}
-{\mintinline{php}{#2}}
-
-% Comandos de consola dentro del texto:
-\DeclareTotalTCBox{\consolecode}{ s m }
-{verbatim,colupper=white,colback=black!75!white,colframe=black,leftright skip=1mm}
-{\mintinline[style=vim]{sh}{#2}}
-
 % Una caja informativa genérica. De forma predeterminada, muestra el icono de
 % una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
 \DeclareTotalTColorBox{\caja}{ s O{} O{hint} m }
@@ -146,6 +139,25 @@
      #2}
     {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#3}\tcblower}%
      \small{#4}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINICIÓN DE COMANDOS PARA CÓDIGO QUE NO VA EN CAJAS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Código PHP dentro del texto:
+\DeclareTotalTCBox{\phpcode}{ s m }
+{verbatim,colback=\codigocolback,colframe=\codigocolframe,leftright skip=1mm}
+{\mintinline{php}{#2}}
+
+% Comandos de consola dentro del texto.
+% Ejemplos:
+%   \consolecode{cd /}      => $ cd /
+%   \consolecode*{cd /}     => cd /
+%   \consolecode[\#]{cd /}  => # cd /
+%   \consolecode[$>$]{cd /} => > cd /
+\DeclareTotalTCBox{\consolecode}{ s O{\$} m }
+{verbatim,colupper=white,colback=\consolecolback,colframe=\consolecolframe,leftright skip=1mm}
+{\IfBooleanTF {#1}{}{{\color{\consolecolprompt}#2}} \mintinline[style=vim]{sh}{#3}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CUBIERTA
