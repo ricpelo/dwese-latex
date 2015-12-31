@@ -4,8 +4,8 @@
 %\usepackage{mathpazo}
 %\usepackage{eulervm}
 \usepackage{lmodern}
-\usepackage{bera}
-%\usepackage{textcomp}
+\usepackage{textcomp}
+\usepackage{beramono}
 \usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \usepackage[pdftex]{color,graphicx}
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
@@ -74,6 +74,7 @@
     listing only,
     left=8mm,
     enhanced,
+    drop fuzzy shadow,
     adjusted title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
@@ -97,6 +98,7 @@
     listing only,
     left=8mm,
     enhanced,
+    drop fuzzy shadow,
     adjusted title=Listado~\thetcbcounter: \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}},
     before title={\hypersetup{urlcolor=yellow}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
@@ -354,6 +356,8 @@ Free Documentation License\textquotedbl{} on this book.
 
 \section{Prueba}
 
+Número 123456789,0 $123456789,0$.
+
 \caja[adjusted title=Prueba]{\lipsum[2]}
 %\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
 
@@ -479,6 +483,6 @@ Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
 \chapter{Otro capítulo}
 
-dfsfsdf
+\tikz \draw (0pt,0pt) -- (20pt,6pt); \tikz \fill[orange] (1ex,1ex) circle (1ex); \tikz \draw (0,0) -- (1,0) -- (1,1) -- cycle;
 
 \end{document}
