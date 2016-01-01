@@ -25,8 +25,6 @@ fn_htmlphp()
     fn_iphp $1
 }
 
-echo "el 1 es $1 y el 2 es $2"
-
 cd code
 
 case $1 in
