@@ -10,25 +10,27 @@
 \fi
 \usepackage{fontspec}
 \setmainfont{DejaVu Serif}
-\setmonofont{Input}
+\setmonofont[Scale=MatchLowercase]{Input}
 \usepackage{polyglossia}
 \setmainlanguage{spanish}
 \else
 %\usepackage{mathpazo}
 %\usepackage{eulervm}
-%\usepackage{kpfonts}
-\usepackage{lmodern}
+\usepackage{kpfonts}
+%\usepackage{lmodern}
+%\usepackage{libertineRoman}
 %\usepackage{mathptmx}
 %\usepackage[bitstream-charter]{mathdesign}
-%\usepackage{textcomp}
+\usepackage{textcomp}
 \usepackage[scaled]{beramono}
+%\usepackage[ttdefault,scale=0.98]{AnonymousPro}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \fi
 \usepackage{color,graphicx}
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
-\usepackage[unicode,colorlinks]{hyperref}
+\usepackage[unicode,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
 
 \chapterstyle{veelo}
@@ -54,7 +56,7 @@
 % DEFINICIONES PARA LA PORTADA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
+%\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
 
 \newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
     \hbox{ % Horizontal box
@@ -67,7 +69,7 @@
             {\LARGE \textsc{Ricardo Pérez López}}
 
             \vspace{0.5\textheight} % Whitespace between the title block and the publisher
-            {\noindent\large I.E.S. Doñana \plogo}\\[\baselineskip] % Publisher and logo
+            {\noindent\large I.E.S. Doñana}\\[\baselineskip] % Publisher and logo
         }}
         \endgroup}
 
@@ -181,6 +183,15 @@
 \DeclareTotalTCBox{\consolecode}{ s O{\$} m }
 {verbatim,colupper=white,colback=\consolecolback,colframe=\consolecolframe,leftright skip=1mm}
 {\IfBooleanTF {#1}{}{{\color{\consolecolprompt}#2}} \mintinline[style=vim]{sh}{#3}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OTROS COMANDOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\notamargen[1]{
+    \marginpar{\flushright \checkoddpage
+        \ifoddpage \flushleft \fi
+        \textit{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CUBIERTA
@@ -382,7 +393,9 @@ Número 123456789,0 $123456789,0$.
 \caja[adjusted title=Prueba]{\lipsum[2]}
 %\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
 
-\lipsum
+\lipsum[2]\notamargen{mauris fklsj lfkjskljsf kl.}
+
+\lipsum[1]
 
 \begin{htmlphp}[Prueba][label=etiqueta,breakable]
 00000000011111111112222222222333333333344444444445555555555666666666677777777778
