@@ -1,4 +1,11 @@
 \documentclass[a4paper,11pt]{memoir}
+\usepackage{etoolbox}
+\newtoggle{DEBUG} % Por omisión está a false
+%\toggletrue{DEBUG}
+\iftoggle{DEBUG}{%
+    \overfullrule=1mm
+    \usepackage{showframe}
+}{}
 \usepackage{ifxetex}
 \ifxetex
     \usepackage{fontspec}
@@ -120,12 +127,12 @@
     colback=\codigocolback,
     colframe=\codigocolframe,
     fonttitle=\large\bfseries,
-    listing only,
+    \iftoggle{DEBUG}{listing and text}{listing only},
     left=8mm,
     enhanced,
     drop fuzzy shadow,
     oversize,
-    adjusted title=Listado~\thetcbcounter: \href{##3}{\ifthenelse{\equal{##1}{}}{##3}{##1}},
+    adjusted title=Listado~\thetcbcounter: \href{##3}{\ifblank{##1}{##3}{##1}},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -446,7 +453,8 @@ El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
   \end{itemize}
 \end{itemize}
 
-\ihtmlphp[][label=otra]{prueba}
+%\ihtmlphp[][label=otra]{prueba.php}
+%\ihtmlphp[Prueba][label=otra]{prueba.php}
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
