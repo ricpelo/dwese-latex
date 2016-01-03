@@ -1,30 +1,34 @@
 \documentclass[a4paper,11pt]{memoir}
 \usepackage{ifxetex}
 \ifxetex
-\usepackage{fontspec}
-%\setmainfont{DejaVu Serif}
-\setmonofont[
-Path=/home/ricardo/.fonts/,
-BoldFont=Inconsolata-Bold.ttf,
-AutoFakeSlant,
-BoldItalicFeatures={FakeSlant},
-]{Inconsolata-Regular.ttf}
-\usepackage{polyglossia}
-\setmainlanguage{spanish}
+    \usepackage{fontspec}
+    %\setmainfont{DejaVu Serif}
+    \setmonofont[
+        Path=/home/ricardo/.fonts/,
+        BoldFont=Inconsolata-Bold.ttf,
+        AutoFakeSlant,
+        BoldItalicFeatures={FakeSlant},
+    ]{Inconsolata-Regular.ttf}
+    \usepackage{polyglossia}
+    \setmainlanguage{spanish}
+    \PolyglossiaSetup{spanish}{indentfirst=false}
+    \usepackage[dotinlabels]{titletoc}
+    \usepackage{titlesec}
+    \titlelabel{\thetitle.\quad}
 \else
-%\usepackage{mathpazo}
-%\usepackage{eulervm}
-%\usepackage{kpfonts}
-\usepackage{lmodern}
-%\usepackage{libertineRoman}
-%\usepackage{mathptmx}
-%\usepackage[bitstream-charter]{mathdesign}
-\usepackage{textcomp}
-\usepackage[scaled]{beramono}
-%\usepackage[ttdefault,scale=0.98]{AnonymousPro}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
+    %\usepackage{mathpazo}
+    %\usepackage{eulervm}
+    %\usepackage{kpfonts}
+    \usepackage{lmodern}
+    %\usepackage{libertineRoman}
+    %\usepackage{mathptmx}
+    %\usepackage[bitstream-charter]{mathdesign}
+    \usepackage{textcomp}
+    \usepackage[scaled]{beramono}
+    %\usepackage[ttdefault,scale=0.98]{AnonymousPro}
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \fi
 \usepackage{color,graphicx}
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
@@ -140,6 +144,10 @@ BoldItalicFeatures={FakeSlant},
 \listado{phpnoinline}{iphp}{php}{}{}{php}
 \listado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
+% Las líneas anteriores crean entornos con estas opciones:
+% \begin{entorno}[título][opciones adicionales para \newtcblisting]
+% \end{entorno}
+
 % Parámetros:
 % #1 : Nombre del comando
 % #2 : Tipo de archivo para el linter
@@ -150,6 +158,9 @@ BoldItalicFeatures={FakeSlant},
 \listadoinput{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
 \listadoinput{\iphpnoinline}{iphp}{php}{}{}
 \listadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
+
+% Las líneas anteriores crean comandos con estas opciones:
+% \comando[título][opciones adicionales para \newtcbinputlisting]{archivo a insertar}
 
 % Una caja informativa genérica. De forma predeterminada, muestra el icono de
 % una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
@@ -515,7 +526,7 @@ class Articulos extends CI_Controller
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
-Ésto es parte de código PHP \phpcode{echo "hola";} directamente. También podemos escribir código de consola \consolecode{cd /}.
+Ésto es <<parte>> de código PHP \phpcode{echo "hola";} directamente. También podemos escribir código de consola \consolecode{cd /}.
 
 \chapter{Otro capítulo}
 
