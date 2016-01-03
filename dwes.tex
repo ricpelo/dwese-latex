@@ -85,11 +85,11 @@
 
 % Macro que define una plantilla para crear cajas de listados de código:
 \newcommand{\listado}[6]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{code/\thetcbcounter.#6}} O{} }{
+\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{\thetcbcounter.#6}} O{} }{%
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\footnotesize,linenos,numbersep=3mm,#5},
-    listing file=code/\thetcbcounter.#6,
+    listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=\codigocolback,
     colframe=\codigocolframe,
@@ -114,7 +114,7 @@
     listing engine=minted,
     minted language=#3,
     minted options={fontsize=\footnotesize,linenos,numbersep=3mm,#5},
-    listing file=##3,
+    listing file={##3},
     run system command={./linter.sh #2 ##3},
     colback=\codigocolback,
     colframe=\codigocolframe,
@@ -408,7 +408,7 @@ Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
 \lipsum[1]
 
-\begin{htmlphp}[Prueba][label=etiqueta,breakable]
+\begin{htmlphp}%[Prueba][label=etiqueta,breakable]
 00000000011111111112222222222333333333344444444445555555555666666666677777777778
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 <html>
@@ -422,96 +422,19 @@ Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
         } ?>
     </body>
 </html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
-<html>
-<body><?php
-class Articulos extends CI_Controller
-{
-public function index()
-{
-$this->load->view('articulos/index');
-}
-} ?>
-</body>
-</html>
 \end{htmlphp}
 
 El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
 
-\begin{php}[Otra prueba]
-class Articulos extends CI_Controller
-{
-    public function index()
-    {
-        $this->load->view('articulos/index');
-    }
-}
-\end{php}
+%\begin{php}[Otra prueba]
+%class Articulos extends CI_Controller
+%{
+%    public function index()
+%    {
+%        $this->load->view('articulos/index');
+%    }
+%}
+%\end{php}
 
 \begin{itemize}
   \item pepe
