@@ -1,23 +1,21 @@
 \documentclass[a4paper,11pt]{memoir}
 \usepackage{ifxetex}
 \ifxetex
-\ifdefined\suppressfontnotfounderror
-\expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
-\suppressfontnotfounderror
-\else
-\expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
-\luatexsuppressfontnotfounderror
-\fi
 \usepackage{fontspec}
-\setmainfont{DejaVu Serif}
-\setmonofont[Scale=MatchLowercase]{Input}
+%\setmainfont{DejaVu Serif}
+\setmonofont[
+Path=/home/ricardo/.fonts/,
+BoldFont=Inconsolata-Bold.ttf,
+AutoFakeSlant,
+BoldItalicFeatures={FakeSlant},
+]{Inconsolata-Regular.ttf}
 \usepackage{polyglossia}
 \setmainlanguage{spanish}
 \else
 %\usepackage{mathpazo}
 %\usepackage{eulervm}
-\usepackage{kpfonts}
-%\usepackage{lmodern}
+%\usepackage{kpfonts}
+\usepackage{lmodern}
 %\usepackage{libertineRoman}
 %\usepackage{mathptmx}
 %\usepackage[bitstream-charter]{mathdesign}
@@ -198,6 +196,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\pdfpageheight297mm
+\pdfpagewidth210mm
 
 \frontmatter
 \pagestyle{empty}
@@ -388,7 +388,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 \section{Prueba}
 
-Número 123456789,0 $123456789,0$.
+Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
 \caja[adjusted title=Prueba]{\lipsum[2]}
 %\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
