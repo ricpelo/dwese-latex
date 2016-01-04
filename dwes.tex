@@ -361,12 +361,33 @@ Free Documentation License\textquotedbl{} on this book.
 \renewcommand{\contentsname}{Resumen de contenido}
 \begingroup
 \setcounter{tocdepth}{0}
+
+\renewcommand{\cftpartfont}{\scshape}
 \renewcommand{\cftpartaftersnum}{.}
 \renewcommand{\cftchapteraftersnum}{.}
-\renewcommand*\cftpartindent{0em}
+\newlength{\numchapterlen}
+\setlength{\numchapterlen}{0.5em}
+\renewcommand{\cftchapterpresnum}{\hfill}
+\renewcommand{\cftchapteraftersnum}{.\hspace*{\numchapterlen}}
+\addtolength{\cftchapternumwidth}{\numchapterlen}
+
+\makeatletter
+\renewcommand*{\cftpartformatpnum}[1]{%
+    \cftpartformatpnumhook{#1}%
+    \hbox to \@pnumwidth{{\cftpartpagefont #1}}}
+\renewcommand*{\cftchapterformatpnum}[1]{%
+    \cftchapterformatpnumhook{#1}%
+    \hbox to \@pnumwidth{{\cftchapterpagefont #1}}}
+\makeatother
+
+\renewcommand{\cftpartleader}{\textperiodcentered}
+\renewcommand{\cftpartafterpnum}{\cftparfillskip}
+\renewcommand{\cftchapterleader}{\textperiodcentered}
+\renewcommand{\cftchapterafterpnum}{\cftparfillskip}
+\renewcommand{\cftpartaftersnum}{.}
+\renewcommand*\cftpartindent{3em}
 \renewcommand*\cftpartnumwidth{3em}
-\renewcommand*\cftchapterindent{3em}
-\renewcommand*\cftchapternumwidth{2em}
+\renewcommand*\cftchapterindent{6em}
 
 \begin{KeepFromToc}
     \tableofcontents*
@@ -401,7 +422,7 @@ Free Documentation License\textquotedbl{} on this book.
 \renewcommand{\cftpartfont}{\scshape}
 \renewcommand{\cftpartaftersnum}{.}
 \renewcommand{\cftchapteraftersnum}{.}
-\newlength{\numchapterlen}
+%\newlength{\numchapterlen}
 \setlength{\numchapterlen}{0.5em}
 \renewcommand{\cftchapterpresnum}{\hfill}
 \renewcommand{\cftchapteraftersnum}{.\hspace*{\numchapterlen}}
@@ -429,7 +450,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 \chapter{Introducción}
 
-\chapterprecis{Donde se habla de esto y de aquello.}
+\chapterprecishere{Donde se habla de ésto y de aquello.}
 
 \section{Prueba}
 
