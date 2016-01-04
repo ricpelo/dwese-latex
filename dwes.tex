@@ -41,7 +41,7 @@
 \fi
 \usepackage{color,graphicx}
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
-\usepackage[unicode,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
+\usepackage[unicode,pdfpagelabels,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
 
 \chapterstyle{veelo}
@@ -221,7 +221,8 @@
 \pdfpagewidth210mm
 
 \frontmatter
-\pagestyle{empty}
+\pagenumbering{roman}
+\thispagestyle{empty}
 \pdfbookmark[-1]{Inicio}{Inicio}
 \pdfbookmark[0]{Portada}{Portada}
 \titleGM
@@ -231,7 +232,7 @@
 % PORTADA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\thispagestyle{empty}
+\thispagestyle{empty}
 \large
 \hfill
 \vfill
@@ -268,6 +269,10 @@
 % LICENCIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pagestyle{plain}
+\makeevenfoot{plain}{\thepage}{}{}
+\makeoddfoot{plain}{}{}{\thepage}
+\setcounter{page}{2}
 \pdfbookmark[0]{Licencia}{Licencia}
 \hfill
 
@@ -304,13 +309,13 @@ no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
 A copy of the license is included in the section entitled \textquotedbl{}GNU
 Free Documentation License\textquotedbl{} on this book.
 
-\cleardoublepage
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEDICATORIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\thispagestyle{empty}
+%\thispagestyle{empty}
 \pdfbookmark[0]{Dedicatoria}{Dedicatoria}
 
 \vspace*{3cm}
@@ -330,7 +335,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 \pdfbookmark[0]{Agradecimientos}{Agradecimientos}
 \chapter*{Agradecimientos}
-\thispagestyle{empty}
+%\thispagestyle{empty}
 
 \lipsum[1-2]
 
@@ -342,11 +347,11 @@ Free Documentation License\textquotedbl{} on this book.
 
 \pdfbookmark[0]{Acerca del autor}{Acerca del autor}
 \chapter*{Acerca del autor}
-\thispagestyle{empty}
+%\thispagestyle{empty}
 
 \lipsum[3-4]
 
-\clearpage
+\cleardoublepage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESUMEN DE CONTENIDO
@@ -354,18 +359,19 @@ Free Documentation License\textquotedbl{} on this book.
 
 \pdfbookmark[0]{Resumen de contenido}{Resumen de contenido}
 \renewcommand{\contentsname}{Resumen de contenido}
-%\begingroup \huge \myTitle \endgroup
 \begingroup
-\setcounter{tocdepth}{-1}
-%\makeatletter
+\setcounter{tocdepth}{0}
+\renewcommand{\cftpartaftersnum}{.}
+\renewcommand{\cftchapteraftersnum}{.}
 \renewcommand*\cftpartindent{0em}
 \renewcommand*\cftpartnumwidth{3em}
-%\makeatother
+\renewcommand*\cftchapterindent{3em}
+\renewcommand*\cftchapternumwidth{2em}
+
 \begin{KeepFromToc}
     \tableofcontents*
 \end{KeepFromToc}
-\thispagestyle{empty}
-\endgroup%
+\endgroup
 
 \cleardoublepage
 
@@ -373,8 +379,7 @@ Free Documentation License\textquotedbl{} on this book.
 % INDICE GENERAL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setcounter{page}{1}
-\pagestyle{ruled}
+%\pagestyle{ruled}
 \pdfbookmark[0]{Índice general}{Indice general}
 \renewcommand{\contentsname}{Índice general}
 
@@ -385,21 +390,40 @@ Free Documentation License\textquotedbl{} on this book.
 \cftsetindents{paragraph}{10.7em}{5.7em}
 \cftsetindents{subparagraph}{12.7em}{6.7em}
 
-\makeatletter
+%\makeatletter
+%\settocpreprocessor{part}{%
+%    \let\tempf@rtoc\f@rtoc%
+%    \def\f@rtoc{%
+%        \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+%}
+%\makeatother
+
+\renewcommand{\cftpartfont}{\scshape}
+\renewcommand{\cftpartaftersnum}{.}
+\renewcommand{\cftchapteraftersnum}{.}
+\newlength{\numchapterlen}
+\setlength{\numchapterlen}{0.5em}
+\renewcommand{\cftchapterpresnum}{\hfill}
+\renewcommand{\cftchapteraftersnum}{.\hspace*{\numchapterlen}}
+\addtolength{\cftchapternumwidth}{\numchapterlen}
+
 \renewcommand*\cftpartindent{0em}
 \renewcommand*\cftchapterindent{1em}
 \renewcommand*\cftpartnumwidth{3em}
+\makeatletter
 \renewcommand{\l@section}{\@dottedtocline{1}{2em}{2.6em}} \renewcommand{\l@subsection}{\@dottedtocline{2}{3.8em}{3.2em}} \renewcommand{\l@subsubsection}{\@dottedtocline{3}{7.0em}{4.1em}}
 \makeatother
 \setcounter{tocdepth}{2}
 
-\tableofcontents
+\tableofcontents*
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONTENIDO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \mainmatter
+\pagestyle{ruled}
+\pagenumbering{arabic}
 
 \part{Conceptos básicos}
 
@@ -465,5 +489,36 @@ Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 \chapter{Otro capítulo}
 
 \tikz \draw (0pt,0pt) -- (20pt,6pt); \tikz \fill[orange] (1ex,1ex) circle (1ex); \tikz \draw (0,0) -- (1,0) -- (1,1) -- cycle;
+
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+\chapter{Otro capítulo}
+
 
 \end{document}
