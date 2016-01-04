@@ -16,6 +16,7 @@
         AutoFakeSlant,
         BoldItalicFeatures={FakeSlant},
     ]{Inconsolata-Regular.ttf}
+    \def\codigofontsize{\small}
     \usepackage{polyglossia}
     \setmainlanguage{spanish}
     \PolyglossiaSetup{spanish}{indentfirst=false}
@@ -32,6 +33,7 @@
     %\usepackage[bitstream-charter]{mathdesign}
     \usepackage{textcomp}
     \usepackage[scaled]{beramono}
+    \def\codigofontsize{\footnotesize}
     %\usepackage[ttdefault,scale=0.98]{AnonymousPro}
     \usepackage[T1]{fontenc}
     \usepackage[utf8]{inputenc}
@@ -75,7 +77,7 @@
         \hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
         \parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
             {\noindent\scalebox{1.7}{\HUGE\bfseries Desarrollo web}\\[1.5\baselineskip]%
-                \scalebox{1.7}{\HUGE\bfseries en entorno servidor}\\[2\baselineskip]}
+                \scalebox{1.5}{\HUGE\bfseries en entorno servidor}\\[2\baselineskip]}
             {\LARGE \textsc{Ricardo Pérez López}}
 
             \vspace{0.5\textheight} % Whitespace between the title block and the publisher
@@ -96,7 +98,7 @@
 \DeclareTCBListing[use counter from=contador]{#1}{ O{\url{\thetcbcounter.#6}} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\footnotesize,linenos,numbersep=3mm,#5},
+    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5},
     listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=\codigocolback,
@@ -121,7 +123,7 @@
 \DeclareTCBInputListing[use counter from=contador]{#1}{ O{} O{} m }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\footnotesize,linenos,numbersep=3mm,#5},
+    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5},
     listing file={##3},
     run system command={./linter.sh #2 ##3},
     colback=\codigocolback,
