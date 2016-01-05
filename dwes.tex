@@ -146,6 +146,27 @@
     ##2}
 }
 
+% Macro que define una plantilla para crear cajas de listados de código sencillos:
+\newcommand{\listadosimple}[6]{%
+\DeclareTCBListing[use counter from=contador]{#1}{ O{} O{} }{%
+    listing engine=minted,
+    minted language=#3,
+    minted options={fontsize=\codigofontsize,#5, ##1},
+    listing file={code/\thetcbcounter.#6},
+    run system command={./linter.sh #2 \thetcbcounter.#6},
+    colback=white,
+    colframe=\codigocolframe,
+    fonttitle=\large\bfseries,
+    listing only,
+    enhanced,arc=0mm,outer arc=0mm,
+    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=0mm,
+    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,
+    adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
+    before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
+    #4,
+    ##2}
+}
+
 % Macro que define una plantilla para crear cajas de listados de código
 % que se cargan desde un archivo:
 \newcommand{\listadoinput}[5]{%
@@ -183,33 +204,22 @@
 \listado{phpnoinline}{iphp}{php}{}{}{php}
 \listado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
-\DeclareTCBListing[use counter from=contador]{phpsimple}{}{%
-    listing engine=minted,
-    minted language=php,
-    minted options={fontsize=\codigofontsize,startinline,firstline=3,firstnumber=1},
-    listing file={code/\thetcbcounter.php},
-    run system command={./linter.sh php \thetcbcounter.php},
-    colback=white,
-    colframe=\codigocolframe,
-    fonttitle=\large\bfseries,
-    listing only,
-    enhanced,arc=0mm,outer arc=0mm,
-    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=0mm,
-    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,
-    adjusted title=\href{code/\thetcbcounter.php}{\url{\thetcbcounter.php}},
-    before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}
-}
-
-%\listado{phpsimple}{php}{php}{colback=white,colframe=red!75!black,listing only,
-%    adjusted title=\href{code/\thetcbcounter.php}{\ttfamily\thetcbcounter.php},
-%    enlarge left by=0mm,enlarge right by=0mm,
-%    enhanced,arc=0mm,outer arc=0mm,
-%    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=1mm,
-%    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,no shadow,overlay={}}{startinline,firstline=3,firstnumber=1}{php}
-
-
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[título][opciones adicionales para \newtcblisting]
+% \end{entorno}
+
+% Parámetros:
+% #1 : Nombre del entorno
+% #2 : Tipo de archivo para el linter
+% #3 : Lenguaje para minted (o sea, el lexer para Pygmentize)
+% #4 : Opciones adicionales para \newtcblisting
+% #5 : Opciones adicionales para minted
+% #6 : Extensión del archivo resultante
+
+\listadosimple{phpsimple}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+
+% Las líneas anteriores crean entornos con estas opciones:
+% \begin{entorno}[opciones adicionales para minted][opciones adicionales para \newtcblisting]
 % \end{entorno}
 
 % Parámetros:
