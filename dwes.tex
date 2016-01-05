@@ -151,7 +151,7 @@
 \DeclareTCBListing[use counter from=contador]{#1}{ O{} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,#5, ##1},
+    minted options={fontsize=\codigofontsize,#5,##1},
     listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=white,
@@ -559,28 +559,14 @@ class Articulos extends CI_Controller
 \end{minted}
 
 \begin{phpsimple}
-class HelloWorld {
-    // A ’Hello World’ in Java
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+class Articulos extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('articulos/index');
     }
 }
 \end{phpsimple}
-
-%\begin{tcblisting}{listing engine=minted,minted style=colorful,
-%        minted language=java,
-%        colback=white,colframe=red!75!black,listing only,
-%        title=Hola,
-%        enhanced,arc=0mm,outer arc=0mm,
-%        boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=1mm,
-%        titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm}
-%class HelloWorld {
-%    // A ’Hello World’ in Java
-%    public static void main(String[] args) {
-%        System.out.println("Hello World!");
-%    }
-%}
-%\end{tcblisting}
 
 %\begin{php}[Otra prueba]
 %class Articulos extends CI_Controller
