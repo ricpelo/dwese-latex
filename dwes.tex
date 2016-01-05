@@ -148,23 +148,29 @@
 
 % Macro que define una plantilla para crear cajas de listados de código sencillos:
 \newcommand{\listadosimple}[6]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ O{} O{} }{%
+\DeclareTCBListing[use counter from=contador]{#1}{ s O{} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,#5,##1},
+    minted options={fontsize=\codigofontsize,#5,##2},
     listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=white,
     colframe=\codigocolframe,
-    fonttitle=\large\bfseries,
+    fonttitle=\codigofontsize\bfseries,
     listing only,
-    enhanced,arc=0mm,outer arc=0mm,
-    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=0mm,
-    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,
-    adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
-    before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
+    enhanced,
+    left=0mm,
+    right=0mm,
+    top=0mm,
+    bottom=0mm,
+    IfBooleanTF={##1}
+        {empty,borderline horizontal={0.5mm}{0pt}{\codigocolframe}}%
+        {frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
+         colbacktitle=\codigocolframe,
+         adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
+         before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}},
     #4,
-    ##2}
+    ##3}
 }
 
 % Macro que define una plantilla para crear cajas de listados de código
