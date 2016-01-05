@@ -390,15 +390,15 @@ Free Documentation License\textquotedbl{} on this book.
 \begingroup
 \setcounter{tocdepth}{0}
 
-%\Large
+\Large
 
 \renewcommand{\cftpartfont}{\scshape}
 \renewcommand{\cftpartaftersnum}{.}
-\renewcommand{\cftchapteraftersnum}{.}
 \newlength{\numchapterlen}
 \setlength{\numchapterlen}{0.5em}
 \renewcommand{\cftchapterpresnum}{\hfill}
-\renewcommand{\cftchapteraftersnum}{.\hspace*{\numchapterlen}}
+\renewcommand{\cftchapteraftersnum}{.}
+\renewcommand{\cftchapteraftersnumb}{\hspace*{\numchapterlen}}
 \addtolength{\cftchapternumwidth}{\numchapterlen}
 
 \makeatletter
@@ -451,11 +451,11 @@ Free Documentation License\textquotedbl{} on this book.
 
 \renewcommand{\cftpartfont}{\scshape}
 \renewcommand{\cftpartaftersnum}{.}
-\renewcommand{\cftchapteraftersnum}{.}
 %\newlength{\numchapterlen}
 \setlength{\numchapterlen}{0.5em}
 \renewcommand{\cftchapterpresnum}{\hfill}
-\renewcommand{\cftchapteraftersnum}{.\hspace*{\numchapterlen}}
+\renewcommand{\cftchapteraftersnum}{.}
+\renewcommand{\cftchapteraftersnumb}{\hspace*{\numchapterlen}}
 \addtolength{\cftchapternumwidth}{\numchapterlen}
 
 \renewcommand*\cftpartindent{0em}
