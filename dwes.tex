@@ -44,7 +44,35 @@
 \usepackage[unicode,pdfpagelabels,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RETOQUES DE LA CLASE MEMOIR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapterstyle{veelo}
+
+\makeatletter
+\renewcommand\@makechapterhead[1]{%
+  \chapterheadstart% \vspace*{50\p@}%
+  {%\parindent \z@ \raggedright \normalfont
+   \parskip \z@
+   \parindent \z@ \memRTLraggedright \normalfont
+   \ifm@m@And
+     \printchaptername \chapternamenum \printchapternum
+     \afterchapternum % \par\nobreak \vskip 20\p@
+   \else
+     \printchapternonum
+   \fi
+   \interlinepenalty\@M
+   \printchaptertitle{#1}% QUITO UN ESPACIO MÁS QUE HABÍA EN EL ORIGINAL
+   \afterchaptertitle % \par\nobreak \vskip 40\p@
+  }}
+\makeatother
+
+%\renewcommand{\chaptitlefont}{\normalfont\fontsize{30}{35}\selectfont\bfseries\flushright}
+
+%\renewcommand{\afterchaptertitle}{\medskip\hrule\vspace*{\afterchapskip}}
+
+%\renewcommand*{\precisfont}{\raggedleft\normalfont\itshape}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINICIONES GENERALES
@@ -362,6 +390,8 @@ Free Documentation License\textquotedbl{} on this book.
 \begingroup
 \setcounter{tocdepth}{0}
 
+%\Large
+
 \renewcommand{\cftpartfont}{\scshape}
 \renewcommand{\cftpartaftersnum}{.}
 \renewcommand{\cftchapteraftersnum}{.}
@@ -385,9 +415,9 @@ Free Documentation License\textquotedbl{} on this book.
 \renewcommand{\cftchapterleader}{\textperiodcentered}
 \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
 \renewcommand{\cftpartaftersnum}{.}
-\renewcommand*\cftpartindent{3em}
+\renewcommand*\cftpartindent{0em}
 \renewcommand*\cftpartnumwidth{3em}
-\renewcommand*\cftchapterindent{6em}
+\renewcommand*\cftchapterindent{3em}
 
 \begin{KeepFromToc}
     \tableofcontents*
@@ -450,7 +480,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 \chapter{Introducción}
 
-\chapterprecishere{Donde se habla de ésto y de aquello.}
+%\chapterprecishere{Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello.}
 
 \section{Prueba}
 
@@ -538,8 +568,15 @@ Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 \chapter{Otro capítulo}
 \chapter{Otro capítulo}
 \chapter{Otro capítulo}
+
+\appendix
+
 \chapter{Otro capítulo}
 \chapter{Otro capítulo}
 
+\backmatter
+
+\chapter*{Bibliografía}
+\addcontentsline{toc}{chapter}{Bibliografía}
 
 \end{document}
