@@ -43,6 +43,7 @@
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
 \usepackage[unicode,pdfpagelabels,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
+\setminted{fontsize=\codigofontsize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RETOQUES DE LA CLASE MEMOIR
@@ -182,6 +183,31 @@
 \listado{phpnoinline}{iphp}{php}{}{}{php}
 \listado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
+\DeclareTCBListing[use counter from=contador]{phpsimple}{}{%
+    listing engine=minted,
+    minted language=php,
+    minted options={fontsize=\codigofontsize,startinline,firstline=3,firstnumber=1},
+    listing file={code/\thetcbcounter.php},
+    run system command={./linter.sh php \thetcbcounter.php},
+    colback=white,
+    colframe=\codigocolframe,
+    fonttitle=\large\bfseries,
+    listing only,
+    enhanced,arc=0mm,outer arc=0mm,
+    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=0mm,
+    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,
+    adjusted title=\href{code/\thetcbcounter.php}{\url{\thetcbcounter.php}},
+    before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}
+}
+
+%\listado{phpsimple}{php}{php}{colback=white,colframe=red!75!black,listing only,
+%    adjusted title=\href{code/\thetcbcounter.php}{\ttfamily\thetcbcounter.php},
+%    enlarge left by=0mm,enlarge right by=0mm,
+%    enhanced,arc=0mm,outer arc=0mm,
+%    boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=1mm,
+%    titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm,no shadow,overlay={}}{startinline,firstline=3,firstnumber=1}{php}
+
+
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[título][opciones adicionales para \newtcblisting]
 % \end{entorno}
@@ -217,17 +243,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Código PHP dentro del texto:
-\DeclareTotalTCBox{\phpcode}{ s m }
+\DeclareTotalTCBox{\phpspan}{ s m }
 {verbatim,colback=\codigocolback,colframe=\codigocolframe,leftright skip=1mm}
 {\mintinline{php}{#2}}
 
 % Comandos de consola dentro del texto.
 % Ejemplos:
-%   \consolecode{cd /}      => $ cd /
-%   \consolecode*{cd /}     => cd /
-%   \consolecode[\#]{cd /}  => # cd /
-%   \consolecode[$>$]{cd /} => > cd /
-\DeclareTotalTCBox{\consolecode}{ s O{\$} m }
+%   \consolespan{cd /}      => $ cd /
+%   \consolespan*{cd /}     => cd /
+%   \consolespan[\#]{cd /}  => # cd /
+%   \consolespan[$>$]{cd /} => > cd /
+\DeclareTotalTCBox{\consolespan}{ s O{\$} m }
 {verbatim,colupper=white,colback=\consolecolback,colframe=\consolecolframe,leftright skip=1mm}
 {\IfBooleanTF {#1}{}{{\color{\consolecolprompt}#2}} \mintinline[style=vim]{sh}{#3}}
 
@@ -362,7 +388,7 @@ Free Documentation License\textquotedbl{} on this book.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pdfbookmark[0]{Agradecimientos}{Agradecimientos}
-\chapter*{Agradecimientos}
+\chapter{Agradecimientos}
 %\thispagestyle{empty}
 
 \lipsum[1-2]
@@ -374,7 +400,7 @@ Free Documentation License\textquotedbl{} on this book.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pdfbookmark[0]{Acerca del autor}{Acerca del autor}
-\chapter*{Acerca del autor}
+\chapter{Acerca del autor}
 %\thispagestyle{empty}
 
 \lipsum[3-4]
@@ -487,7 +513,7 @@ Free Documentation License\textquotedbl{} on this book.
 Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
 \caja[adjusted title=Prueba]{\lipsum[2]}
-%\caja[adjusted title=Prueba]{Esto es una prueba \phpcode{echo "hola";}}
+%\caja[adjusted title=Prueba]{Esto es una prueba \phpspan{echo "hola";}}
 
 \lipsum[2]\notamargen{mauris fklsj lfkjskljsf kl.}
 
@@ -510,6 +536,41 @@ Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 \end{htmlphp}
 
 El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
+
+\begin{minted}{php}
+<?php
+class Articulos extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('articulos/index');
+    }
+}
+\end{minted}
+
+\begin{phpsimple}
+class HelloWorld {
+    // A ’Hello World’ in Java
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+\end{phpsimple}
+
+%\begin{tcblisting}{listing engine=minted,minted style=colorful,
+%        minted language=java,
+%        colback=white,colframe=red!75!black,listing only,
+%        title=Hola,
+%        enhanced,arc=0mm,outer arc=0mm,
+%        boxrule=0mm,toprule=1mm,bottomrule=1mm,left=0mm,right=1mm,
+%        titlerule=0mm,toptitle=0mm,bottomtitle=1mm,top=2mm}
+%class HelloWorld {
+%    // A ’Hello World’ in Java
+%    public static void main(String[] args) {
+%        System.out.println("Hello World!");
+%    }
+%}
+%\end{tcblisting}
 
 %\begin{php}[Otra prueba]
 %class Articulos extends CI_Controller
@@ -535,7 +596,7 @@ El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
-Ésto es <<parte>> de código PHP \phpcode{echo "hola";} directamente. También podemos escribir código de consola \consolecode{cd /}.
+Ésto es <<parte>> de código PHP \phpspan{echo "hola";} directamente. También podemos escribir código de consola \consolespan{cd /}.
 
 \chapter{Otro capítulo}
 
