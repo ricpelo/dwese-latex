@@ -251,16 +251,15 @@
 
 \newcommand{\mcodigo}[2]{%
 \DeclareTColorBox[blend into=figures]{#1}{ s O{} }{%
-    colback=white,
-    colframe=\codigocolframe,
     size=minimal,
     left=\parindent,
     top=3mm,
-    bottom=3mm,
-    empty,
+    bottom=-1mm,
+    arc=1mm,outer arc=1mm,
+    colframe=black!5!white,
     breakable,
     fontupper=\ttfamily\small,
-    before upper={\alltt}, after upper={\endalltt},
+    before upper=\alltt,after=\endalltt,
     #2,
     ##2}
 }
@@ -681,30 +680,6 @@ class Articulos extends CI_Controller
     public function index()
     {
         $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
-        $this->load->view('articulos/index');
     }
 }
 \end{phpsimple}
@@ -798,13 +773,13 @@ información que queda sólo en el cliente.
 \begin{verbatim}
  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
  \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
-  |           |               |       |                |    |            |                |
+  |           |               |       |                |    |            |               |
   |       userinfo         hostname  port              |    |          query        fragment
   |    \________________________________/\_____________|____|/ \__/        \__/
   |                    |                          |    |    |    |          |
 scheme             authority                    path   |    |    interpretable as keys
- name  \_______________________________________________|____|/       \____/     \_____/
-  |                         |                          |    |          |           |
+ name  \_______________________________________________|____|/      \____/      \_____/
+  |                         |                          |    |         |            |
   |                  hierarchical part                 |    |    interpretable as values
   |                                                    |    |
   |            path               interpretable as filename |
@@ -836,6 +811,7 @@ GET /hola HTTP/1.1          \emph{\(\leftarrow\) línea de request}
 \end{codigo}
 
 donde:
+
 \begin{codigo}
 GET     /hola   HTTP/1.1
 |       |       |
@@ -956,7 +932,7 @@ lo que permite que el cliente pueda enviar más requests usando la
 misma conexión:
 
 \begin{codigo}
-\textbf{$} telnet www.ejemplo.com 80
+\textbf{\$} telnet www.ejemplo.com 80
 GET /hola HTTP/1.0
 Host: www.ejemplo.com
 HTTP/1.0 200 OK \(\leftarrow\) \emph{A partir de aquí viene la respuesta del servidor}
