@@ -43,6 +43,9 @@
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
 \usepackage[unicode,pdfpagelabels,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
+\usepackage{mathabx}
+\usepackage{alltt}
+
 \setminted{fontsize=\codigofontsize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -238,7 +241,9 @@
 % - Es breakable por defecto.
 % - No genera ningún archivo descargable.
 % - No usa ningún linter para comprobar la sintaxis del código.
-% - Usa por defecto un tipo de letra monoespaciado.
+% - Usa el entorno alltt, que funciona de modo similar a verbatim pero
+%   al mismo tiempo permite usar comandos LaTeX y entrar en modo matemático
+%   usando \( y \).
 % - El contenido va sangrado el espacio equivalente a una indentación.
 
 \newcommand{\mcodigo}[2]{%
@@ -252,6 +257,7 @@
     empty,
     breakable,
     fontupper=\ttfamily\small,
+    before upper={\alltt}, after upper={\endalltt},
     #2,
     ##2}
 }
@@ -828,16 +834,14 @@ http://www.ejemplo.com/hola
 el navegador genera una petición HTTP que comienza por esta línea:
 
 \begin{codigo}
-GET /hola HTTP/1.1~~~~~~~~~~\emph{$\leftarrow$ línea de request}
+GET /hola HTTP/1.1          \emph{\(\leftarrow\) línea de request}
 \end{codigo}
 
 donde:
 \begin{codigo}
-GET~~~~~/hola~~~HTTP/1.1
-
-|~~~~~~~|~~~~~~~|
-
-método~~ruta~~~~versión
+GET     /hola   HTTP/1.1
+|       |       |
+método  ruta    versión
 \end{codigo}
 
 \begin{itemize}
@@ -854,66 +858,58 @@ método~~ruta~~~~versión
     \end{itemize}
 \end{itemize}
 
-%    Un ejemplo completo, con la cabecera \texttt{Host}:
-%    \begin{verbatim}
-%        GET~/hola~HTTP/1.1
-%        
-%        Host:~www.ejemplo.com
-%    \end{verbatim}
-%    
-%    \subsection{Cabeceras (\emph{headers}) de las requests}
-%    
-%    Algunas cabeceras:
-%    \begin{itemize}
-%        \item \texttt{\textbf{Host:}}\texttt{ www.ejemplo.com}
-%        \item \texttt{\textbf{User-Agent:}}\texttt{ chrome}
-%        \item \texttt{\textbf{Referer:}}\texttt{ http://www.pepe.com/adios} \emph{$\leftarrow$
-%            La URL origen de la request}
-%        \item \texttt{\textbf{Cookie:}}\texttt{ PHPSESSID=12313abcbd123}
-%    \end{itemize}
-%    
-%    \section{Respuestas HTTP (\emph{HTTP responses})}
-%
-%    \begin{verbatim}
-%        HTTP/1.1~200~OK
-%        
-%        Date:~Tue~mar~2012~04:33:33~GMT
-%        
-%        Server:~Apache~/2.2.3
-%        
-%        Content-Type:~text/html;~charset=utf-8
-%        
-%        Content-Length:~1539
-%        
-%        {\Pisymbol{psy}{191}}
-%        
-%        blablabla\dots{}~\emph{~~~~~~~~~~~~~~~(así~hasta~1539~bytes)}
-%    \end{verbatim}
-%    
-%    \subsection{Cabeceras (\emph{headers}) de las responses}
-%    
-%    Algunas cabeceras:
-%    \begin{itemize}
-%        \item \texttt{\textbf{Set-Cookie:}}\texttt{ PHPSESSID=12313abcbd123}
-%        \item \texttt{\textbf{Location:}} index.php \emph{$\leftarrow$} \emph{Para
-%            redirecciones}
-%        \item \texttt{\textbf{Expires:}} \emph{$\leftarrow$} \emph{El tiempo de
-%            vida válido de la página (para cachés)}
-%    \end{itemize}
-%    Ejemplo de envío de parámetros mediante \emph{POST}:
-%    \begin{verbatim}
-%        POST~/shop/28/Shop.aspx~HTTP/1.1
-%        
-%        Host:~mdsec.net
-%        
-%        \textbf{Content-Type:~application/x-www-form-urlencoded}
-%        
-%        Content-Length:~20
-%        
-%        {\Pisymbol{psy}{191}}
-%        
-%        quantity=1\&price=449
-%    \end{verbatim}
+Un ejemplo completo, con la cabecera \texttt{Host}:
+\begin{codigo}
+GET /hola HTTP/1.1
+Host: www.ejemplo.com
+\end{codigo}
+
+\subsection{Cabeceras (\emph{headers}) de las requests}
+
+Algunas cabeceras:
+\begin{itemize}
+    \item \texttt{\textbf{Host:}}\texttt{ www.ejemplo.com}
+    \item \texttt{\textbf{User-Agent:}}\texttt{ chrome}
+    \item \texttt{\textbf{Referer:}}\texttt{ http://www.pepe.com/adios} \emph{$\leftarrow$
+        La URL origen de la request}
+    \item \texttt{\textbf{Cookie:}}\texttt{ PHPSESSID=12313abcbd123}
+\end{itemize}
+
+\section{Respuestas HTTP (\emph{HTTP responses})}
+
+\begin{codigo}
+HTTP/1.1 200 OK
+Date: Tue mar 2012 04:33:33 GMT
+Server: Apache /2.2.3
+Content-Type: text/html; charset=utf-8
+Content-Length: 1539
+\(\dlsh\)
+blablabla...                (\emph{así hasta 1539 bytes)}
+\end{codigo}
+
+\subsection{Cabeceras (\emph{headers}) de las responses}
+
+Algunas cabeceras:
+
+\begin{itemize}
+    \item \texttt{\textbf{Set-Cookie:} PHPSESSID=12313abcbd123}
+    \item \texttt{\textbf{Location:} index.php \(\leftarrow\) \emph{Para
+        redirecciones}}
+    \item \texttt{\textbf{Expires:} \(\leftarrow\) \emph{El tiempo de
+        vida válido de la página (para cachés)}}
+\end{itemize}
+
+Ejemplo de envío de parámetros mediante \emph{POST}:
+
+\begin{alltt}
+POST /shop/28/Shop.aspx HTTP/1.1
+Host: mdsec.net
+\textbf{Content-Type: application/x-www-form-urlencoded}
+Content-Length: 20
+\(\dlsh\)
+quantity=1\&price=449
+\end{alltt}
+
 %    
 %    \section{Códigos de estado (\emph{status codes})}
 %    \begin{itemize}
