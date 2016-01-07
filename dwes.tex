@@ -122,12 +122,23 @@
 % usen el mismo contador:
 \newtcolorbox[auto counter,number within=section]{contador}{}
 
-% Macro que define una plantilla para crear cajas de listados de código:
-\newcommand{\listado}[6]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{\thetcbcounter.#6}} O{} }{%
+% Macro que define una plantilla para crear cajas de listados de código. Estas cajas
+% tienen las siguientes características:
+% - Tienen un estilo que destaca sobre el cuerpo del texto, con un borde,
+%   un color de fondo diferente al del texto principal y una sombra difusa.
+% - Sobresale un poco por los márgenes izquierdo y derecho.
+% - Siempre tienen un título, que normalmente será descriptivo (esto es, manual).
+% - Hace correr el contador de listados.
+% - Tienen un espacio reservado para los números de línea.
+% - No es breakable por defecto.
+% - Genera un archivo descargable directamente desde un enlace en el título.
+% - Usa un linter para comprobar la sintaxis del código.
+
+\newcommand{\mlistado}[6]{%
+\DeclareTCBListing[use counter from=contador]{#1}{ O{\url{\thetcbcounter.#6}} O{} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5},
+    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5,##3},
     listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colback=\codigocolback,
@@ -146,19 +157,30 @@
     ##2}
 }
 
-% Macro que define una plantilla para crear cajas de listados de código sencillos:
-\newcommand{\listadosimple}[6]{%
+% Macro que define una plantilla para crear cajas de listados de código sencillos
+% pero descargables. Estas cajas tienen las siguientes características:
+% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
+%   ni sombras ni color de fondo.
+% - No sobresale por los márgenes izquierdo y derecho.
+% - Pueden tener un título, que en todo caso siempre será el nombre del archivo
+%   a descargar (esto es, un título automático). Si se usa con *, no mostrará
+%   ningún título, pero este caso no es ideal, ya que el contador de listados
+%   sigue corriendo igualmente, y se mostrarían saltos en el contador.
+% - Hace correr el contador de listados.
+% - No muestra números de línea.
+% - Es breakable por defecto.
+% - Genera un archivo descargable directamente desde un enlace en el título.
+% - Usa un linter para comprobar la sintaxis del código.
+
+\newcommand{\mlistadosimpledes}[6]{%
 \DeclareTCBListing[use counter from=contador]{#1}{ s O{} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,#5,##2},
-    listing file={code/\thetcbcounter.#6},
-    run system command={./linter.sh #2 \thetcbcounter.#6},
+    minted options={fontsize=\codigofontsize,#5,##3},
     colback=white,
-    colframe=\codigocolframe,
     fonttitle=\codigofontsize\bfseries,
     listing only,
-    enhanced,
+    breakable,
     left=0mm,
     right=0mm,
     top=0mm,
@@ -166,20 +188,81 @@
     IfBooleanTF={##1}
         {empty,borderline horizontal={0.5mm}{0pt}{\codigocolframe}}%
         {frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
+         listing file={code/\thetcbcounter.#6},
+         run system command={./linter.sh #2 \thetcbcounter.#6},
          colbacktitle=\codigocolframe,
+         colframe=\codigocolframe,
          adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
          before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}},
     #4,
-    ##3}
+    ##2}
+}
+
+% Macro que define una plantilla para crear cajas de listados de código sencillos
+% y NO descargables. Estas cajas tienen las siguientes características:
+% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
+%   ni sombras ni color de fondo.
+% - No sobresale por los márgenes izquierdo y derecho.
+% - No muestra ningún título.
+% - No hace correr el contador de listados.
+% - No muestra números de línea.
+% - Es breakable por defecto.
+% - No genera ningún archivo descargable.
+% - No usa ningún linter para comprobar la sintaxis del código.
+
+\newcommand{\mlistadosimplenodes}[4]{%
+\DeclareTCBListing{#1}{ s O{} O{} }{%
+    listing engine=minted,
+    minted language=#2,
+    minted options={fontsize=\codigofontsize,#4,##3},
+    colback=white,
+    listing only,
+    left=0mm,
+    right=0mm,
+    boxsep=0mm,
+    empty,
+    breakable,
+%    borderline horizontal={0.5mm}{0pt}{\codigocolframe}
+    #3,
+    ##2}
+}
+
+% Macro que define una plantilla para crear cajas de texto minimalistas similares a los LyX-code.
+% Estas cajas tienen las siguientes características:
+% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
+%   ni sombras ni color de fondo.
+% - No sobresale por los márgenes izquierdo y derecho.
+% - No muestra ningún título.
+% - No hace correr el contador de listados.
+% - No muestra números de línea.
+% - Es breakable por defecto.
+% - No genera ningún archivo descargable.
+% - No usa ningún linter para comprobar la sintaxis del código.
+% - Usa por defecto un tipo de letra monoespaciado.
+% - El contenido va sangrado el espacio equivalente a una indentación.
+
+\newcommand{\mcodigo}[2]{%
+\DeclareTColorBox[blend into=figures]{#1}{ s O{} }{%
+    colback=white,
+    colframe=\codigocolframe,
+    size=minimal,
+    left=\parindent,
+    top=3mm,
+    bottom=3mm,
+    empty,
+    breakable,
+    fontupper=\ttfamily\small,
+    #2,
+    ##2}
 }
 
 % Macro que define una plantilla para crear cajas de listados de código
 % que se cargan desde un archivo:
-\newcommand{\listadoinput}[5]{%
-\DeclareTCBInputListing[use counter from=contador]{#1}{ O{} O{} m }{%
+\newcommand{\mlistadoinput}[5]{%
+\DeclareTCBInputListing[use counter from=contador]{#1}{ O{} O{} O{} m }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5},
+    minted options={fontsize=\codigofontsize,linenos,numbersep=3mm,#5,##3},
     listing file={##3},
     run system command={./linter.sh #2 ##3},
     colback=\codigocolback,
@@ -190,7 +273,7 @@
     enhanced,
     drop fuzzy shadow,
     oversize,
-    adjusted title=Listado~\thetcbcounter: \href{##3}{\ifblank{##1}{##3}{##1}},
+    adjusted title=Listado~\thetcbcounter: \href{##4}{\ifblank{##1}{##4}{##1}},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -206,12 +289,12 @@
 % #5 : Opciones adicionales para minted
 % #6 : Extensión del archivo resultante
 
-\listado{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
-\listado{phpnoinline}{iphp}{php}{}{}{php}
-\listado{htmlphp}{htmlphp}{html+php}{}{}{php}
+\mlistado{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\mlistado{phpnoinline}{iphp}{php}{}{}{php}
+\mlistado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
 % Las líneas anteriores crean entornos con estas opciones:
-% \begin{entorno}[título][opciones adicionales para \newtcblisting]
+% \begin{entorno}[título][opciones adicionales para \newtcblisting][opciones adicionales para minted]
 % \end{entorno}
 
 % Parámetros:
@@ -222,10 +305,36 @@
 % #5 : Opciones adicionales para minted
 % #6 : Extensión del archivo resultante
 
-\listadosimple{phpsimple}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\mlistadosimpledes{phpsimpledes}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+
+% Parámetros:
+% #1 : Nombre del entorno
+% #2 : Lenguaje para minted (o sea, el lexer para Pygmentize)
+% #3 : Opciones adicionales para \newtcblisting
+% #4 : Opciones adicionales para minted
+
+\mlistadosimplenodes{phpsimplenodes}{php}{}{startinline}
 
 % Las líneas anteriores crean entornos con estas opciones:
-% \begin{entorno}[opciones adicionales para minted][opciones adicionales para \newtcblisting]
+% \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
+% \end{entorno}
+
+\DeclareDocumentEnvironment{phpsimple}{ s O{} O{} }
+{\IfBooleanTF{#1}{\phpsimplenodes[#2][#3]}{\phpsimpledes[#2][#3]}}
+{\IfBooleanTF{#1}{\endphpsimplenodes}{\endphpsimpledes}}
+
+% Las líneas anteriores crean entornos con estas opciones:
+% \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
+% \end{entorno}
+
+% Parámetros:
+% #1 : Nombre del entorno
+% #2 : Opciones adicionales para \tcolorbox
+
+\mcodigo{codigo}{}
+
+% Las líneas anteriores crean entornos con estas opciones:
+% \begin{entorno}[opciones adicionales para \tcolorbox]
 % \end{entorno}
 
 % Parámetros:
@@ -235,12 +344,12 @@
 % #4 : Opciones adicionales para \newtcbinputlisting
 % #5 : Opciones adicionales para minted
 
-\listadoinput{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
-\listadoinput{\iphpnoinline}{iphp}{php}{}{}
-\listadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
+\mlistadoinput{\iphp}{iphp}{php}{}{startinline,firstline=3,firstnumber=1}
+\mlistadoinput{\iphpnoinline}{iphp}{php}{}{}
+\mlistadoinput{\ihtmlphp}{htmlphp}{html+php}{}{}
 
 % Las líneas anteriores crean comandos con estas opciones:
-% \comando[título][opciones adicionales para \newtcbinputlisting]{archivo a insertar}
+% \comando[título][opciones adicionales para \newtcbinputlisting][opciones adicionales para minted]{archivo a insertar}
 
 % Una caja informativa genérica. De forma predeterminada, muestra el icono de
 % una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
@@ -405,7 +514,6 @@ Free Documentation License\textquotedbl{} on this book.
 
 \pdfbookmark[0]{Agradecimientos}{Agradecimientos}
 \chapter{Agradecimientos}
-%\thispagestyle{empty}
 
 \lipsum[1-2]
 
@@ -417,7 +525,6 @@ Free Documentation License\textquotedbl{} on this book.
 
 \pdfbookmark[0]{Acerca del autor}{Acerca del autor}
 \chapter{Acerca del autor}
-%\thispagestyle{empty}
 
 \lipsum[3-4]
 
@@ -518,9 +625,9 @@ Free Documentation License\textquotedbl{} on this book.
 \pagestyle{ruled}
 \pagenumbering{arabic}
 
-\part{Conceptos básicos}
+\part{Introducción}
 
-\chapter{Introducción}
+\chapter{Introducción a la tecnología web}
 
 %\chapterprecishere{Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello.}
 
@@ -564,11 +671,35 @@ class Articulos extends CI_Controller
 }
 \end{minted}
 
-\begin{phpsimple}
+\begin{phpsimple}*
 class Articulos extends CI_Controller
 {
     public function index()
     {
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
+        $this->load->view('articulos/index');
         $this->load->view('articulos/index');
     }
 }
@@ -600,37 +731,340 @@ Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
 Ésto es <<parte>> de código PHP \phpspan{echo "hola";} directamente. También podemos escribir código de consola \consolespan{cd /}.
 
-\chapter{Otro capítulo}
+\section{URIs}
 
-\tikz \draw (0pt,0pt) -- (20pt,6pt); \tikz \fill[orange] (1ex,1ex) circle (1ex); \tikz \draw (0,0) -- (1,0) -- (1,1) -- cycle;
+Dos tipos de URI:
+\begin{description}
+    \item [{URL:}] Identifica un recurso indicando dónde está y cómo alcanzarlo.
+    \item [{URN:}] Identifica un recurso mediante su nombre.
+\end{description}
 
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
-\chapter{Otro capítulo}
+\subsection{Sintaxis genérica}
+
+\begin{center}
+\begingroup
+\ttfamily\footnotesize
+\emph{<nombre~de~esquema>}~\textbf{:}~\emph{<parte~jerárquica>}~{[}~\textbf{?}~\emph{<consulta>}~{]}~{[}~\textbf{\#}~\emph{<fragmento>}~{]}
+\par
+\endgroup
+\end{center}
+
+El \texttt{\emph{<nombre de esquema>}} consiste en una secuencia de
+caracteres empezando con una letra seguida de cualquier combinación
+de letras, dígitos, más (<<\texttt{+}>>), punto (<<\texttt{.}>>)
+o guión (<<\texttt{-}>>). Los esquemas no distinguen mayúsculas de
+minúsculas, pero lo normal es ponerlo en minúsculas. A continuación
+van dos puntos (<<\texttt{:}>>).
+
+La \texttt{\emph{<parte jerárquica>}} del URI pretende contener información
+jerárquica identificativa. Normalmente esta parte comienza con dos
+barras inclinadas (<<\texttt{//}>>), seguidas por una \texttt{\emph{parte autoritaria}}
+y una \emph{\texttt{ruta opcional}}.
+
+La \emph{\texttt{parte autoritaria}} contiene una parte opcional de
+\emph{\texttt{información del usuario}}, acabada en <<\texttt{@}>>
+(p. ej. \texttt{nombreusuario:contraseña@}), un \emph{\texttt{nombre de equipo}}
+(p. ej. un nombre de dominio o una IP) y un \emph{\texttt{número de puerto}}
+opcional precedido por dos puntos (<<\texttt{:}>>).
+
+La \texttt{\emph{ruta}} es una secuencia de \texttt{\emph{segmentos}}
+(conceptualmente similares a directorios, aunque no necesariamente
+lo sean), separados por una barra inclinada (<<\texttt{/}>>).
+
+La \texttt{\emph{consulta}} es una parte opcional, separada por un
+signo de interrogación (<<\texttt{?}>>), que contiene información
+que no es de naturaleza jerárquica. Normalmente está organizada como
+una secuencia de parejas \texttt{\emph{<clave>}\textbf{=}\emph{<valor>}},
+separando cada pareja con un punto y coma (<<\texttt{;}>>) o un ampersand\index{ampersand}
+(<<\texttt{\&}>>).
+
+El \texttt{\emph{fragmento}} es una parte opcional separada del resto
+por una almohadilla (<<\texttt{\#}>>). Contiene información adicional
+de identificación que proporciona la dirección a un recurso secundario,
+como la cabecera de una sección (en un artículo) identificado por
+el resto del URI. Cuando el recurso primario es un documento HTML,
+el fragmento a menudo representa el atributo \texttt{id} de un elemento
+específico. El fragmento no se envía al servidor web, sino que es
+información que queda sólo en el cliente.
+
+\subsubsection{Ejemplos}
+
+\begin{tcolorbox}[float=htb,enhanced,left=0mm,right=0mm,oversize,drop fuzzy shadow,adjusted title=Partes de una URL]
+\scriptsize
+\begin{verbatim}
+ foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
+ \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
+  |           |               |       |                |    |            |                |
+  |       userinfo         hostname  port              |    |          query        fragment
+  |    \________________________________/\_____________|____|/ \__/        \__/
+  |                    |                          |    |    |    |          |
+scheme             authority                    path   |    |    interpretable as keys
+ name  \_______________________________________________|____|/       \____/     \_____/
+  |                         |                          |    |          |           |
+  |                  hierarchical part                 |    |    interpretable as values
+  |                                                    |    |
+  |            path               interpretable as filename |
+  |   ___________|____________                              |
+ / \ /                        \                             |
+ urn:example:animal:ferret:nose               interpretable as extension
+
+scheme
+ name   userinfo  hostname       query
+  _|__   ___|__   ____|____   _____|_____
+ /    \ /      \ /         \ /           \
+ mailto:username@example.com?subject=Topic
+\end{verbatim}
+\end{tcolorbox}
+
+\section{Peticiones HTTP (\emph{HTTP request})}
+
+Cuando abrimos el navegador y tecleamos en la barra de direcciones,
+por ejemplo, la siguiente URL:
+
+\begin{codigo}
+http://www.ejemplo.com/hola
+\end{codigo}
+
+el navegador genera una petición HTTP que comienza por esta línea:
+
+\begin{codigo}
+GET /hola HTTP/1.1~~~~~~~~~~\emph{$\leftarrow$ línea de request}
+\end{codigo}
+
+donde:
+\begin{codigo}
+GET~~~~~/hola~~~HTTP/1.1
+
+|~~~~~~~|~~~~~~~|
+
+método~~ruta~~~~versión
+\end{codigo}
+
+\begin{itemize}
+    \item El método, también llamado verbo, representa la acción que se desea
+    llevar a cabo, y el estándar define varios, pero los cinco principales
+    son los siguientes:
+
+    \begin{itemize}
+        \item \texttt{GET}
+        \item \texttt{POST}
+        \item \texttt{PUT}
+        \item \texttt{PATCH}
+        \item \texttt{DELETE}
+    \end{itemize}
+\end{itemize}
+
+%    Un ejemplo completo, con la cabecera \texttt{Host}:
+%    \begin{verbatim}
+%        GET~/hola~HTTP/1.1
+%        
+%        Host:~www.ejemplo.com
+%    \end{verbatim}
+%    
+%    \subsection{Cabeceras (\emph{headers}) de las requests}
+%    
+%    Algunas cabeceras:
+%    \begin{itemize}
+%        \item \texttt{\textbf{Host:}}\texttt{ www.ejemplo.com}
+%        \item \texttt{\textbf{User-Agent:}}\texttt{ chrome}
+%        \item \texttt{\textbf{Referer:}}\texttt{ http://www.pepe.com/adios} \emph{$\leftarrow$
+%            La URL origen de la request}
+%        \item \texttt{\textbf{Cookie:}}\texttt{ PHPSESSID=12313abcbd123}
+%    \end{itemize}
+%    
+%    \section{Respuestas HTTP (\emph{HTTP responses})}
+%
+%    \begin{verbatim}
+%        HTTP/1.1~200~OK
+%        
+%        Date:~Tue~mar~2012~04:33:33~GMT
+%        
+%        Server:~Apache~/2.2.3
+%        
+%        Content-Type:~text/html;~charset=utf-8
+%        
+%        Content-Length:~1539
+%        
+%        {\Pisymbol{psy}{191}}
+%        
+%        blablabla\dots{}~\emph{~~~~~~~~~~~~~~~(así~hasta~1539~bytes)}
+%    \end{verbatim}
+%    
+%    \subsection{Cabeceras (\emph{headers}) de las responses}
+%    
+%    Algunas cabeceras:
+%    \begin{itemize}
+%        \item \texttt{\textbf{Set-Cookie:}}\texttt{ PHPSESSID=12313abcbd123}
+%        \item \texttt{\textbf{Location:}} index.php \emph{$\leftarrow$} \emph{Para
+%            redirecciones}
+%        \item \texttt{\textbf{Expires:}} \emph{$\leftarrow$} \emph{El tiempo de
+%            vida válido de la página (para cachés)}
+%    \end{itemize}
+%    Ejemplo de envío de parámetros mediante \emph{POST}:
+%    \begin{verbatim}
+%        POST~/shop/28/Shop.aspx~HTTP/1.1
+%        
+%        Host:~mdsec.net
+%        
+%        \textbf{Content-Type:~application/x-www-form-urlencoded}
+%        
+%        Content-Length:~20
+%        
+%        {\Pisymbol{psy}{191}}
+%        
+%        quantity=1\&price=449
+%    \end{verbatim}
+%    
+%    \section{Códigos de estado (\emph{status codes})}
+%    \begin{itemize}
+%        \item \texttt{200 OK}
+%        \item \texttt{302 Found}
+%        \item \texttt{404 Not found}
+%        \item \texttt{500 Server error}
+%    \end{itemize}
+%    Significado de los códigos:
+%    \begin{itemize}
+%        \item \texttt{2{*}{*}}: Éxito
+%        \item \texttt{3{*}{*}}: Necesitamos algo diferente (técnicamente hablando)
+%        para encontrar el documento
+%        \item \texttt{4{*}{*}}: Hay un error en la parte del navegador
+%        \item \texttt{5{*}{*}}: Hay un error en la parte del servidor
+%    \end{itemize}
+%    \begin{center}
+%        \begin{tabular}{|c|c|}
+%            \hline 
+%            \textbf{GET} & \textbf{POST}\tabularnewline
+%            \hline 
+%            \hline 
+%            Parámetros en la URL & Parámetros en el cuerpo\tabularnewline
+%            \hline 
+%            Usado para recuperar documentos & Usado para actualizar datos\tabularnewline
+%            \hline 
+%            Longitud máxima en la URL & Sin longitud máxima\tabularnewline
+%            \hline 
+%            Se puede cachear & No se puede cachear\tabularnewline
+%            \hline 
+%            No debería cambiar nada en el servidor & Puede cambiar cosas en el servidor\tabularnewline
+%            \hline 
+%        \end{tabular}
+%        \par\end{center}
+%    
+%    
+%    \section{Pruebas}
+%    
+%    
+%    \subsection{Prueba con \protect\texttt{telnet}}
+%    
+%    Al hacer la prueba con \texttt{telnet} interesa usar HTTP/1.0 en lugar
+%    de HTTP/1.1. El motivo es que con 1.1 el servidor no cierra la conexión,
+%    lo que permite que el cliente pueda enviar más requests usando la
+%    misma conexión:
+%    \begin{verbatim}
+%        \textbf{\$}~\commandline{telnet www.ejemplo.com 80}
+%        
+%        GET~/hola~HTTP/1.0
+%        
+%        Host:~www.ejemplo.com
+%        
+%        HTTP/1.0~200~OK~\emph{$\leftarrow$}~A~partir~de~aquí~viene~la~respuesta~del~servidor
+%        
+%        Content-Type:~text/html;~charset=utf8
+%        
+%        {\Pisymbol{psy}{191}}
+%        
+%        ...
+%    \end{verbatim}
+%    
+%    \subsection{Pruebas con \protect\texttt{netcat}}
+%    
+%    Ejemplo de código:
+%    \begin{htmlphp}
+%        <!DOCTYPE html>
+%        <html>
+%        <?php
+%        echo "hola"; ?>
+%        </html>
+%    \end{htmlphp}
+%    Con \texttt{netcat} podemos ver el contenido de la request que envía
+%    un navegador:
+%    
+%    En un terminal ponemos:
+%    \begin{verbatim}
+%        \textbf{\$}~nc~-l~8000
+%    \end{verbatim}
+%    Y en el navegador ponemos, por ejemplo:
+%    \begin{verbatim}
+%        http://localhost:8000/pepe
+%    \end{verbatim}
+%    En el terminal veremos:
+%    \begin{verbatim}
+%        GET~/pepe~HTTP/1.1
+%        
+%        Host:~localhost:8000
+%        
+%        Connection:~keep-alive
+%        
+%        User-Agent:~Mozilla/5.0~(Macintosh;~Intel~Mac~OS~X~10\_8\_1)~\\
+%        ~~~~AppleWebKit/537.1~(KHTML,~like~Gecko)
+%        
+%        ~~~~Chrome/21.0.1180.89~Safari/537.1
+%        
+%        Accept:~text/html,application/xhtml+xml,application/xml;q=0.9,{*}/{*};q=0.8
+%        
+%        Accept-Encoding:~gzip,deflate,sdch
+%        
+%        Accept-Language:~es-ES,es;q=0.8
+%        
+%        Accept-Charset:~UTF-8,{*};q=0.5
+%    \end{verbatim}
+%    Si ahora en el terminal escribimos \texttt{Hola} y pulsamos \texttt{\textasciicircum{}D},
+%    se cerrará la conexión y en el navegador aparecerá \texttt{Hola}.
+%    
+%    
+%    \subsection{Las herramientas para desarrolladores de Google Chrome}
+%    
+%    
+%    \section{Cookies}
+%    
+%    El servidor responde al cliente con esta cabecera:
+%    \begin{verbatim}
+%        \textbf{Set-Cookie:}~PHPSESSID=abc123
+%    \end{verbatim}
+%    El cliente (navegador), a partir de ahora, enviará al servidor esta
+%    cabecera:
+%    \begin{verbatim}
+%        \textbf{Cookie:}~PHPSESSID=abc123
+%    \end{verbatim}
+
+
+\chapter{HTML 5 básico}
+
+
+\chapter{Entornos de desarrollo integrados}
+
+
+\section{La consola}
+
+
+\section{Vim}
+
+
+\section{Atom}
+
+
+\chapter{Introducción al lenguaje PHP}
+
+
+\chapter{Control de versiones: Git}
+
+
+\chapter{Composer}
+
+
+\chapter{Frameworks MVC: CodeIgniter}
+
+
+\chapter{Computación en la nube: Heroku}
 
 \appendix
 
