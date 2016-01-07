@@ -45,8 +45,10 @@
 \usepackage{lipsum}
 \usepackage{mathabx}
 \usepackage{alltt}
+\usepackage{enumitem}
 
 \setminted{fontsize=\codigofontsize}
+\setlist{noitemsep}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RETOQUES DE LA CLASE MEMOIR
@@ -256,6 +258,7 @@
     top=3mm,
     bottom=-1mm,
     arc=1mm,outer arc=1mm,
+    bottomsep at break=3.8mm,
     colframe=black!5!white,
     breakable,
     fontupper=\ttfamily\small,
@@ -410,8 +413,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\pdfpageheight297mm
-\pdfpagewidth210mm
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
 
 \frontmatter
 \pagenumbering{roman}
@@ -935,6 +938,7 @@ misma conexión:
 \textbf{\$} telnet www.ejemplo.com 80
 GET /hola HTTP/1.0
 Host: www.ejemplo.com
+\(\dlsh\)
 HTTP/1.0 200 OK \(\leftarrow\) \emph{A partir de aquí viene la respuesta del servidor}
 Content-Type: text/html; charset=utf8
 \(\dlsh\)
