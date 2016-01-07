@@ -190,12 +190,13 @@
     bottom=0mm,
     IfBooleanTF={##1}
         {empty,borderline horizontal={0.5mm}{0pt}{\codigocolframe}}%
-        {frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
+        {enhanced,
+         frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
          listing file={code/\thetcbcounter.#6},
          run system command={./linter.sh #2 \thetcbcounter.#6},
          colbacktitle=\codigocolframe,
          colframe=\codigocolframe,
-         adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
+         title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
          before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}},
     #4,
     ##2}
@@ -312,6 +313,7 @@
 % #6 : Extensión del archivo resultante
 
 \mlistadosimpledes{phpsimpledes}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\mlistadosimpledes{htmlphpsimpledes}{htmlphp}{html+php}{}{}{php}
 
 % Parámetros:
 % #1 : Nombre del entorno
@@ -320,6 +322,7 @@
 % #4 : Opciones adicionales para minted
 
 \mlistadosimplenodes{phpsimplenodes}{php}{}{startinline}
+\mlistadosimplenodes{htmlphpsimplenodes}{html+php}{}{}
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
@@ -328,6 +331,10 @@
 \DeclareDocumentEnvironment{phpsimple}{ s O{} O{} }
 {\IfBooleanTF{#1}{\phpsimplenodes[#2][#3]}{\phpsimpledes[#2][#3]}}
 {\IfBooleanTF{#1}{\endphpsimplenodes}{\endphpsimpledes}}
+
+\DeclareDocumentEnvironment{htmlphpsimple}{ s O{} O{} }
+{\IfBooleanTF{#1}{\htmlphpsimplenodes[#2][#3]}{\htmlphpsimpledes[#2][#3]}}
+{\IfBooleanTF{#1}{\endhtmlphpsimplenodes}{\endhtmlphpsimpledes}}
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
@@ -666,17 +673,6 @@ Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
 El ref es \ref{etiqueta}, y la página es \pageref{etiqueta}.
 
-\begin{minted}{php}
-<?php
-class Articulos extends CI_Controller
-{
-    public function index()
-    {
-        $this->load->view('articulos/index');
-    }
-}
-\end{minted}
-
 \begin{phpsimple}*
 class Articulos extends CI_Controller
 {
@@ -901,136 +897,134 @@ Algunas cabeceras:
 
 Ejemplo de envío de parámetros mediante \emph{POST}:
 
-\begin{alltt}
+\begin{codigo}
 POST /shop/28/Shop.aspx HTTP/1.1
 Host: mdsec.net
 \textbf{Content-Type: application/x-www-form-urlencoded}
 Content-Length: 20
 \(\dlsh\)
 quantity=1\&price=449
-\end{alltt}
+\end{codigo}
 
-%    
-%    \section{Códigos de estado (\emph{status codes})}
-%    \begin{itemize}
-%        \item \texttt{200 OK}
-%        \item \texttt{302 Found}
-%        \item \texttt{404 Not found}
-%        \item \texttt{500 Server error}
-%    \end{itemize}
-%    Significado de los códigos:
-%    \begin{itemize}
-%        \item \texttt{2{*}{*}}: Éxito
-%        \item \texttt{3{*}{*}}: Necesitamos algo diferente (técnicamente hablando)
-%        para encontrar el documento
-%        \item \texttt{4{*}{*}}: Hay un error en la parte del navegador
-%        \item \texttt{5{*}{*}}: Hay un error en la parte del servidor
-%    \end{itemize}
-%    \begin{center}
-%        \begin{tabular}{|c|c|}
-%            \hline 
-%            \textbf{GET} & \textbf{POST}\tabularnewline
-%            \hline 
-%            \hline 
-%            Parámetros en la URL & Parámetros en el cuerpo\tabularnewline
-%            \hline 
-%            Usado para recuperar documentos & Usado para actualizar datos\tabularnewline
-%            \hline 
-%            Longitud máxima en la URL & Sin longitud máxima\tabularnewline
-%            \hline 
-%            Se puede cachear & No se puede cachear\tabularnewline
-%            \hline 
-%            No debería cambiar nada en el servidor & Puede cambiar cosas en el servidor\tabularnewline
-%            \hline 
-%        \end{tabular}
-%        \par\end{center}
-%    
-%    
-%    \section{Pruebas}
-%    
-%    
-%    \subsection{Prueba con \protect\texttt{telnet}}
-%    
-%    Al hacer la prueba con \texttt{telnet} interesa usar HTTP/1.0 en lugar
-%    de HTTP/1.1. El motivo es que con 1.1 el servidor no cierra la conexión,
-%    lo que permite que el cliente pueda enviar más requests usando la
-%    misma conexión:
-%    \begin{verbatim}
-%        \textbf{\$}~\commandline{telnet www.ejemplo.com 80}
-%        
-%        GET~/hola~HTTP/1.0
-%        
-%        Host:~www.ejemplo.com
-%        
-%        HTTP/1.0~200~OK~\emph{$\leftarrow$}~A~partir~de~aquí~viene~la~respuesta~del~servidor
-%        
-%        Content-Type:~text/html;~charset=utf8
-%        
-%        {\Pisymbol{psy}{191}}
-%        
-%        ...
-%    \end{verbatim}
-%    
-%    \subsection{Pruebas con \protect\texttt{netcat}}
-%    
-%    Ejemplo de código:
-%    \begin{htmlphp}
-%        <!DOCTYPE html>
-%        <html>
-%        <?php
-%        echo "hola"; ?>
-%        </html>
-%    \end{htmlphp}
-%    Con \texttt{netcat} podemos ver el contenido de la request que envía
-%    un navegador:
-%    
-%    En un terminal ponemos:
-%    \begin{verbatim}
-%        \textbf{\$}~nc~-l~8000
-%    \end{verbatim}
-%    Y en el navegador ponemos, por ejemplo:
-%    \begin{verbatim}
-%        http://localhost:8000/pepe
-%    \end{verbatim}
-%    En el terminal veremos:
-%    \begin{verbatim}
-%        GET~/pepe~HTTP/1.1
-%        
-%        Host:~localhost:8000
-%        
-%        Connection:~keep-alive
-%        
-%        User-Agent:~Mozilla/5.0~(Macintosh;~Intel~Mac~OS~X~10\_8\_1)~\\
-%        ~~~~AppleWebKit/537.1~(KHTML,~like~Gecko)
-%        
-%        ~~~~Chrome/21.0.1180.89~Safari/537.1
-%        
-%        Accept:~text/html,application/xhtml+xml,application/xml;q=0.9,{*}/{*};q=0.8
-%        
-%        Accept-Encoding:~gzip,deflate,sdch
-%        
-%        Accept-Language:~es-ES,es;q=0.8
-%        
-%        Accept-Charset:~UTF-8,{*};q=0.5
-%    \end{verbatim}
-%    Si ahora en el terminal escribimos \texttt{Hola} y pulsamos \texttt{\textasciicircum{}D},
-%    se cerrará la conexión y en el navegador aparecerá \texttt{Hola}.
-%    
-%    
-%    \subsection{Las herramientas para desarrolladores de Google Chrome}
-%    
-%    
-%    \section{Cookies}
-%    
-%    El servidor responde al cliente con esta cabecera:
-%    \begin{verbatim}
-%        \textbf{Set-Cookie:}~PHPSESSID=abc123
-%    \end{verbatim}
-%    El cliente (navegador), a partir de ahora, enviará al servidor esta
-%    cabecera:
-%    \begin{verbatim}
-%        \textbf{Cookie:}~PHPSESSID=abc123
-%    \end{verbatim}
+\section{Códigos de estado (\emph{status codes})}
+
+\begin{itemize}
+    \item \texttt{200 OK}
+    \item \texttt{302 Found}
+    \item \texttt{404 Not found}
+    \item \texttt{500 Server error}
+\end{itemize}
+
+Significado de los códigos:
+
+\begin{itemize}
+    \item \texttt{2**}: Éxito
+    \item \texttt{3**}: Necesitamos algo diferente (técnicamente hablando)
+    para encontrar el documento
+    \item \texttt{4**}: Hay un error en la parte del navegador
+    \item \texttt{5**}: Hay un error en la parte del servidor
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+    \hline 
+    \textbf{GET} & \textbf{POST}\\
+    \hline 
+    \hline 
+    Parámetros en la URL & Parámetros en el cuerpo\\
+    \hline 
+    Usado para recuperar documentos & Usado para actualizar datos\\
+    \hline 
+    Longitud máxima en la URL & Sin longitud máxima\\
+    \hline 
+    Se puede cachear & No se puede cachear\\
+    \hline 
+    No debería cambiar nada en el servidor & Puede cambiar cosas en el servidor\\
+    \hline 
+\end{tabular}
+\end{center}
+
+\section{Pruebas}
+
+\subsection{Prueba con \protect\texttt{telnet}}
+
+Al hacer la prueba con \texttt{telnet} interesa usar HTTP/1.0 en lugar
+de HTTP/1.1. El motivo es que con 1.1 el servidor no cierra la conexión,
+lo que permite que el cliente pueda enviar más requests usando la
+misma conexión:
+
+\begin{codigo}
+\textbf{$} telnet www.ejemplo.com 80
+GET /hola HTTP/1.0
+Host: www.ejemplo.com
+HTTP/1.0 200 OK \(\leftarrow\) \emph{A partir de aquí viene la respuesta del servidor}
+Content-Type: text/html; charset=utf8
+\(\dlsh\)
+...
+\end{codigo}
+
+\subsection{Pruebas con \texttt{netcat}}
+
+Ejemplo de código:
+
+\begin{htmlphpsimple}
+<!DOCTYPE html>
+<html>
+<?php
+echo "hola"; ?>
+</html>
+\end{htmlphpsimple}
+
+Con \texttt{netcat} podemos ver el contenido de la request que envía
+un navegador:
+
+En un terminal ponemos:
+\begin{verbatim}
+    \textbf{\$}~nc~-l~8000
+\end{verbatim}
+Y en el navegador ponemos, por ejemplo:
+\begin{verbatim}
+    http://localhost:8000/pepe
+\end{verbatim}
+En el terminal veremos:
+\begin{verbatim}
+    GET~/pepe~HTTP/1.1
+    
+    Host:~localhost:8000
+    
+    Connection:~keep-alive
+    
+    User-Agent:~Mozilla/5.0~(Macintosh;~Intel~Mac~OS~X~10\_8\_1)~\\
+    ~~~~AppleWebKit/537.1~(KHTML,~like~Gecko)
+    
+    ~~~~Chrome/21.0.1180.89~Safari/537.1
+    
+    Accept:~text/html,application/xhtml+xml,application/xml;q=0.9,{*}/{*};q=0.8
+    
+    Accept-Encoding:~gzip,deflate,sdch
+    
+    Accept-Language:~es-ES,es;q=0.8
+    
+    Accept-Charset:~UTF-8,{*};q=0.5
+\end{verbatim}
+Si ahora en el terminal escribimos \texttt{Hola} y pulsamos \texttt{\textasciicircum{}D},
+se cerrará la conexión y en el navegador aparecerá \texttt{Hola}.
+
+
+\subsection{Las herramientas para desarrolladores de Google Chrome}
+
+
+\section{Cookies}
+
+El servidor responde al cliente con esta cabecera:
+\begin{verbatim}
+    \textbf{Set-Cookie:}~PHPSESSID=abc123
+\end{verbatim}
+El cliente (navegador), a partir de ahora, enviará al servidor esta
+cabecera:
+\begin{verbatim}
+    \textbf{Cookie:}~PHPSESSID=abc123
+\end{verbatim}
 
 
 \chapter{HTML 5 básico}
