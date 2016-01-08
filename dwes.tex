@@ -925,7 +925,7 @@ Significado de los códigos:
 
 \section{Pruebas}
 
-\subsection{Prueba con \protect\texttt{telnet}}
+\subsection{Prueba con \texttt{telnet}}
 
 Al hacer la prueba con \texttt{telnet} interesa usar HTTP/1.0 en lugar
 de HTTP/1.1. El motivo es que con 1.1 el servidor no cierra la conexión,
@@ -959,34 +959,32 @@ Con \texttt{netcat} podemos ver el contenido de la request que envía
 un navegador:
 
 En un terminal ponemos:
-\begin{verbatim}
-    \textbf{\$}~nc~-l~8000
-\end{verbatim}
+
+\begin{codigo}
+\textbf{\$ nc -l 8000}
+\end{codigo}
+
 Y en el navegador ponemos, por ejemplo:
-\begin{verbatim}
-    http://localhost:8000/pepe
-\end{verbatim}
+
+\begin{codigo}
+http://localhost:8000/pepe
+\end{codigo}
+
 En el terminal veremos:
-\begin{verbatim}
-    GET~/pepe~HTTP/1.1
-    
-    Host:~localhost:8000
-    
-    Connection:~keep-alive
-    
-    User-Agent:~Mozilla/5.0~(Macintosh;~Intel~Mac~OS~X~10\_8\_1)~\\
-    ~~~~AppleWebKit/537.1~(KHTML,~like~Gecko)
-    
-    ~~~~Chrome/21.0.1180.89~Safari/537.1
-    
-    Accept:~text/html,application/xhtml+xml,application/xml;q=0.9,{*}/{*};q=0.8
-    
-    Accept-Encoding:~gzip,deflate,sdch
-    
-    Accept-Language:~es-ES,es;q=0.8
-    
-    Accept-Charset:~UTF-8,{*};q=0.5
-\end{verbatim}
+
+\begin{codigo}
+GET /pepe HTTP/1.1
+Host: localhost:8000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_8\_1)
+    AppleWebKit/537.1 (KHTML, like Gecko)
+    Chrome/21.0.1180.89 Safari/537.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,{*}/{*};q=0.8
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: es-ES,es;q=0.8
+Accept-Charset: UTF-8,{*};q=0.5
+\end{codigo}
+
 Si ahora en el terminal escribimos \texttt{Hola} y pulsamos \texttt{\textasciicircum{}D},
 se cerrará la conexión y en el navegador aparecerá \texttt{Hola}.
 
@@ -997,15 +995,17 @@ se cerrará la conexión y en el navegador aparecerá \texttt{Hola}.
 \section{Cookies}
 
 El servidor responde al cliente con esta cabecera:
-\begin{verbatim}
-    \textbf{Set-Cookie:}~PHPSESSID=abc123
-\end{verbatim}
+
+\begin{codigo}
+\textbf{Set-Cookie:} PHPSESSID=abc123
+\end{codigo}
+
 El cliente (navegador), a partir de ahora, enviará al servidor esta
 cabecera:
-\begin{verbatim}
-    \textbf{Cookie:}~PHPSESSID=abc123
-\end{verbatim}
 
+\begin{codigo}
+\textbf{Cookie:} PHPSESSID=abc123
+\end{codigo}
 
 \chapter{HTML 5 básico}
 
