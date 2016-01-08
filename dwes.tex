@@ -253,16 +253,14 @@
 
 \newcommand{\mcodigo}[2]{%
 \DeclareTColorBox[blend into=figures]{#1}{ s O{} }{%
-    size=minimal,
-    left=\parindent,
     top=3mm,
     bottom=-1mm,
-    arc=1mm,outer arc=1mm,
     bottomsep at break=3.8mm,
-    colframe=black!5!white,
     breakable,
+    enhanced,
     fontupper=\ttfamily\small,
     before upper=\alltt,after=\endalltt,
+    beforeafter skip=0.5\baselineskip,
     #2,
     ##2}
 }
@@ -935,7 +933,7 @@ lo que permite que el cliente pueda enviar más requests usando la
 misma conexión:
 
 \begin{codigo}
-\textbf{\$} telnet www.ejemplo.com 80
+\textbf{\$ telnet www.ejemplo.com 80}
 GET /hola HTTP/1.0
 Host: www.ejemplo.com
 \(\dlsh\)
