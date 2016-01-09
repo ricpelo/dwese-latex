@@ -153,11 +153,10 @@
     fonttitle=\large\bfseries,
     listing only,
     left=8mm,
-    toptitle=0.5mm,
     enhanced,
     drop fuzzy shadow,
     oversize,
-    title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
+    adjusted title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -193,14 +192,13 @@
     right=0mm,
     top=0mm,
     bottom=0mm,
-    toptitle=0.3mm,
     enhanced,
     frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
     listing file={code/\thetcbcounter.#6},
     run system command={./linter.sh #2 \thetcbcounter.#6},
     colbacktitle=\codigocolframe,
     colframe=\codigocolframe,
-    title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
+    adjusted title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     #4,
     ##1}
@@ -279,11 +277,10 @@
     fonttitle=\large\bfseries,
     \iftoggle{DEBUG}{listing and text}{listing only},
     left=8mm,
-    toptitle=0.5mm,
     enhanced,
     drop fuzzy shadow,
     oversize,
-    title=Listado~\thetcbcounter: \href{##4}{\ifblank{##1}{##4}{##1}},
+    adjusted title=Listado~\thetcbcounter: \href{##4}{\ifblank{##1}{##4}{##1}},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -326,8 +323,27 @@
 
 \mlistadosimplenodes{phpsimplenodes}{php}{}{startinline}
 \mlistadosimplenodes{htmlphpsimplenodes}{html+php}{}{}
-\mlistadosimplenodes{shellsessionnocounter}{console}{run system command={./session.sh temporal.txt},listing file={temporal.txt},enhanced,size=normal,oversize,left=1mm,colback=black!3!white}{}
-\mlistadosimplenodes{shellsessioncounter}{console}{run system command={./session.sh temporal.txt},listing file={temporal.txt},enhanced,size=normal,oversize,left=1mm,colback=black!3!white,toptitle=0.5mm,blend before title code={\textbf{##1: }}}{}[blend into=figures]
+\mlistadosimplenodes{shellsessionnocounter}{console}%
+    {run system command={./session.sh temporal.txt},
+     listing file={temporal.txt},
+     enhanced,
+     size=normal,
+     oversize,
+     left=1mm,
+     colback=black!3!white
+    }%
+    {}
+\mlistadosimplenodes{shellsessioncounter}{console}%
+    {run system command={./session.sh temporal.txt},
+     listing file={temporal.txt},
+     enhanced,
+     size=normal,
+     oversize,
+     left=1mm,
+     fonttitle={\large\textbf{Figura~\thefigure}:~},
+     colback=black!3!white,
+    }%
+    {}[use counter*=figure]
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
@@ -384,7 +400,9 @@
           colbacklower=green!5},
      adjusted title=#2,
      #3}
-    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#4}\tcblower}%
+    {\IfBooleanTF {#1}
+        {}%
+        {\includegraphics[width=\linewidth]{iconos/#4}\tcblower}%
      \small{#5}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -953,6 +971,13 @@ Content-Type: text/html; charset=utf8
 
 \subsection{Pruebas con \texttt{netcat}}
 
+\begin{shellsession}[adjusted title=Hola]
+    % cd ..
+    ls -pFx
+    cd ..
+    ls -Fx
+\end{shellsession}
+
 Ejemplo de código:
 
 \begin{htmlphpsimple}
@@ -1053,12 +1078,5 @@ cabecera:
 \backmatter
 
 \chapter{Bibliografía}
-
-\begin{shellsession}[title=Hola]
-% cd ..
-ls -pFx
-cd ..
-ls -Fx
-\end{shellsession}
 
 \end{document}
