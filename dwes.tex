@@ -958,7 +958,7 @@ lo que permite que el cliente pueda enviar más requests usando la
 misma conexión:
 
 \begin{codigo}
-\textbf{\$ telnet www.ejemplo.com 80}
+{\bfseries\mintinline{sh}{$ telnet www.ejemplo.com 80}}
 GET /hola HTTP/1.0
 Host: www.ejemplo.com
 \(\dlsh\)
@@ -966,15 +966,15 @@ HTTP/1.0 200 OK \(\leftarrow\) \emph{A partir de aquí viene la respuesta del se
 Content-Type: text/html; charset=utf8
 \(\dlsh\)
 ...
-\end{codigo}
+\end{codigo}%$
 
 \subsection{Pruebas con \texttt{netcat}}
 
 \begin{shellsession}[adjusted title=Hola]
-    % cd ..
-    ls -pFx
-    cd ..
-    ls -Fx
+% cd ..
+ls -pFx
+cd ..
+ls -Fx
 \end{shellsession}
 
 Ejemplo de código:
@@ -993,7 +993,7 @@ un navegador:
 En un terminal ponemos:
 
 \begin{codigo}
-\textbf{\$ nc -l 8000}
+\mintinline{sh}{$ nc -l 8000}
 \end{codigo}
 
 Y en el navegador ponemos, por ejemplo:
