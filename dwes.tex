@@ -153,10 +153,11 @@
     fonttitle=\large\bfseries,
     listing only,
     left=8mm,
+    toptitle=0.5mm,
     enhanced,
     drop fuzzy shadow,
     oversize,
-    adjusted title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
+    title=Listado~\thetcbcounter: \href{code/\thetcbcounter.#6}{##1},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -166,7 +167,7 @@
 
 % Macro que define una plantilla para crear cajas de listados de código sencillos
 % pero descargables. Estas cajas tienen las siguientes características:
-% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
+% - Tienen un estilo que se funde con el cuerpo del texto principal, sin bordes
 %   ni sombras ni color de fondo.
 % - No sobresale por los márgenes izquierdo y derecho.
 % - Pueden tener un título, que en todo caso siempre será el nombre del archivo
@@ -180,10 +181,10 @@
 % - Usa un linter para comprobar la sintaxis del código.
 
 \newcommand{\mlistadosimpledes}[6]{%
-\DeclareTCBListing[use counter from=contador]{#1}{ s O{} O{} }{%
+\DeclareTCBListing[use counter from=contador]{#1}{ O{} O{} }{%
     listing engine=minted,
     minted language=#3,
-    minted options={fontsize=\codigofontsize,#5,##3},
+    minted options={fontsize=\codigofontsize,#5,##2},
     colback=white,
     fonttitle=\codigofontsize\bfseries,
     listing only,
@@ -192,23 +193,21 @@
     right=0mm,
     top=0mm,
     bottom=0mm,
-    IfBooleanTF={##1}
-        {empty,borderline horizontal={0.5mm}{0pt}{\codigocolframe}}%
-        {enhanced,
-         frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
-         listing file={code/\thetcbcounter.#6},
-         run system command={./linter.sh #2 \thetcbcounter.#6},
-         colbacktitle=\codigocolframe,
-         colframe=\codigocolframe,
-         title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
-         before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}}},
+    enhanced,
+    frame hidden,borderline south={0.5mm}{0pt}{\codigocolframe},
+    listing file={code/\thetcbcounter.#6},
+    run system command={./linter.sh #2 \thetcbcounter.#6},
+    colbacktitle=\codigocolframe,
+    colframe=\codigocolframe,
+    title=\href{code/\thetcbcounter.#6}{\url{\thetcbcounter.#6}},
+    before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     #4,
-    ##2}
+    ##1}
 }
 
 % Macro que define una plantilla para crear cajas de listados de código sencillos
 % y NO descargables. Estas cajas tienen las siguientes características:
-% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
+% - Tienen un estilo que se funde con el cuerpo del texto principal, sin bordes
 %   ni sombras ni color de fondo.
 % - No sobresale por los márgenes izquierdo y derecho.
 % - No muestra ningún título.
@@ -218,8 +217,9 @@
 % - No genera ningún archivo descargable.
 % - No usa ningún linter para comprobar la sintaxis del código.
 
-\newcommand{\mlistadosimplenodes}[4]{%
-\DeclareTCBListing{#1}{ s O{} O{} }{%
+%\newcommand{\mlistadosimplenodes}[4]{%
+\DeclareDocumentCommand{\mlistadosimplenodes}{ m m m m O{} }{%
+\DeclareTCBListing[#5]{#1}{ s O{} O{} }{%
     listing engine=minted,
     minted language=#2,
     minted options={fontsize=\codigofontsize,#4,##3},
@@ -237,8 +237,7 @@
 
 % Macro que define una plantilla para crear cajas de texto minimalistas similares a los LyX-code.
 % Estas cajas tienen las siguientes características:
-% - Tienen un estilo que se funde con el cuerpo del texto principal, si bordes
-%   ni sombras ni color de fondo.
+% - Tienen un borde y un fondo de color neutro.
 % - No sobresale por los márgenes izquierdo y derecho.
 % - No muestra ningún título.
 % - No hace correr el contador de listados.
@@ -252,7 +251,7 @@
 % - El contenido va sangrado el espacio equivalente a una indentación.
 
 \newcommand{\mcodigo}[2]{%
-\DeclareTColorBox[blend into=figures]{#1}{ s O{} }{%
+\DeclareTColorBox{#1}{ s O{} }{%
     top=3mm,
     bottom=-1mm,
     bottomsep at break=3.8mm,
@@ -279,10 +278,11 @@
     fonttitle=\large\bfseries,
     \iftoggle{DEBUG}{listing and text}{listing only},
     left=8mm,
+    toptitle=0.5mm,
     enhanced,
     drop fuzzy shadow,
     oversize,
-    adjusted title=Listado~\thetcbcounter: \href{##4}{\ifblank{##1}{##4}{##1}},
+    title=Listado~\thetcbcounter: \href{##4}{\ifblank{##1}{##4}{##1}},
     before title={\hypersetup{urlcolor=\urlcolor,filecolor=\urlcolor}},
     overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
             rectangle ([xshift=8mm]frame.north west);\end{tcbclipinterior}},
@@ -325,6 +325,8 @@
 
 \mlistadosimplenodes{phpsimplenodes}{php}{}{startinline}
 \mlistadosimplenodes{htmlphpsimplenodes}{html+php}{}{}
+\mlistadosimplenodes{shellsessionnocounter}{console}{run system command={./session.sh temporal.txt},listing file={temporal.txt},enhanced,size=normal,oversize,left=1mm,colback=black!3!white}{}
+\mlistadosimplenodes{shellsessioncounter}{console}{run system command={./session.sh temporal.txt},listing file={temporal.txt},enhanced,size=normal,oversize,left=1mm,colback=black!3!white,toptitle=0.5mm,blend before title code={\textbf{##1: }}}{}[blend into=figures]
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
@@ -338,9 +340,14 @@
 {\IfBooleanTF{#1}{\htmlphpsimplenodes[#2][#3]}{\htmlphpsimpledes[#2][#3]}}
 {\IfBooleanTF{#1}{\endhtmlphpsimplenodes}{\endhtmlphpsimpledes}}
 
+\DeclareDocumentEnvironment{shellsession}{ s O{} O{} }
+{\IfBooleanTF{#1}{\shellsessionnocounter[#2][#3]}{\shellsessioncounter[#2][#3]}}
+{\IfBooleanTF{#1}{\endshellsessionnocounter}{\endshellsessioncounter}}
+
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
 % \end{entorno}
+% Opcionalmente puede haber un * detrás de \begin{entorno}
 
 % Parámetros:
 % #1 : Nombre del entorno
@@ -368,15 +375,16 @@
 
 % Una caja informativa genérica. De forma predeterminada, muestra el icono de
 % una bombilla encendida. Si se usa la forma \caja*, no se muestra ningún icono:
-\DeclareTotalTColorBox{\caja}{ s O{} O{hint} m }
+\DeclareTotalTColorBox{\caja}{ s O{} O{} O{hint} m }
     {center,width=0.9\linewidth,fonttitle=\large\bfseries,drop fuzzy shadow,
      IfBooleanTF={#1}
          {colback=green!5}%
          {bicolor,sidebyside,lefthand width=2cm,colback=green!50!black!50,
           colbacklower=green!5},
-     #2}
-    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#3}\tcblower}%
-     \small{#4}}
+     adjusted title=#2,
+     #3}
+    {\IfBooleanTF {#1}{}{\includegraphics[width=\linewidth]{iconos/#4}\tcblower}%
+     \small{#5}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINICIÓN DE COMANDOS PARA CÓDIGO QUE NO VA EN CAJAS
@@ -650,8 +658,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
-\caja[adjusted title=Prueba]{\lipsum[2]}
-%\caja[adjusted title=Prueba]{Esto es una prueba \phpspan{echo "hola";}}
+\caja[Prueba]{\lipsum[2]}
 
 \lipsum[2]\notamargen{mauris fklsj lfkjskljsf kl.}
 
@@ -1044,5 +1051,12 @@ cabecera:
 \backmatter
 
 \chapter{Bibliografía}
+
+\begin{shellsession}[title=Hola]
+% cd ..
+ls -pFx
+cd ..
+ls -Fx
+\end{shellsession}
 
 \end{document}
