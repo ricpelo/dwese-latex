@@ -15,9 +15,9 @@
         BoldFont=Inconsolata-Bold.ttf,
         AutoFakeSlant,
         BoldItalicFeatures={FakeSlant},
-        Scale=0.9
+        Scale=MatchLowercase
     ]{Inconsolata-Regular.ttf}
-    \def\codigofontsize{\normalsize}
+    \def\codigofontsize{\small}
     \usepackage{polyglossia}
     \setmainlanguage{spanish}
     \PolyglossiaSetup{spanish}{indentfirst=false}
@@ -671,6 +671,7 @@ Free Documentation License\textquotedbl{} on this book.
 
 \chapter{Introducción a la tecnología web}
 
+\texttt{a}a\texttt{b}b\texttt{c}c\texttt{d}d\texttt{e}e\texttt{1}1\texttt{2}2
 %\chapterprecishere{Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello.}
 
 \section{Prueba}
@@ -795,8 +796,8 @@ información que queda sólo en el cliente.
 
 \subsubsection{Ejemplos}
 
-\begin{tcolorbox}[float=htb,enhanced,left=1mm,right=2.5mm,oversize,drop fuzzy shadow,adjusted title=Partes de una URL]
-\footnotesize
+\begin{tcolorbox}[float=htb,enhanced,left=2mm,drop fuzzy shadow,adjusted title=Partes de una URL]
+\scriptsize
 \begin{verbatim}
  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
  \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
