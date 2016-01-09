@@ -15,8 +15,9 @@
         BoldFont=Inconsolata-Bold.ttf,
         AutoFakeSlant,
         BoldItalicFeatures={FakeSlant},
+        Scale=0.9
     ]{Inconsolata-Regular.ttf}
-    \def\codigofontsize{\small}
+    \def\codigofontsize{\normalsize}
     \usepackage{polyglossia}
     \setmainlanguage{spanish}
     \PolyglossiaSetup{spanish}{indentfirst=false}
@@ -251,11 +252,11 @@
 \newcommand{\mcodigo}[2]{%
 \DeclareTColorBox{#1}{ s O{} }{%
     top=3mm,
-    bottom=-1mm,
+    bottom=-1.5mm,
     bottomsep at break=3.8mm,
     breakable,
     enhanced,
-    fontupper=\ttfamily\small,
+    fontupper=\ttfamily\codigofontsize,
     before upper=\alltt,after=\endalltt,
     beforeafter skip=0.5\baselineskip,
     #2,
@@ -794,8 +795,8 @@ información que queda sólo en el cliente.
 
 \subsubsection{Ejemplos}
 
-\begin{tcolorbox}[float=htb,enhanced,left=0mm,right=0mm,oversize,drop fuzzy shadow,adjusted title=Partes de una URL]
-\scriptsize
+\begin{tcolorbox}[float=htb,enhanced,left=1mm,right=2.5mm,oversize,drop fuzzy shadow,adjusted title=Partes de una URL]
+\footnotesize
 \begin{verbatim}
  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
  \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
