@@ -97,7 +97,6 @@
 \def\codigocolframe{red!75!black}
 \def\consolecolback{black!75!white}
 \def\consolecolframe{black}
-\def\consolecolprompt{orange}
 \def\urlcolor{yellow}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -416,13 +415,13 @@
 
 % Comandos de consola dentro del texto.
 % Ejemplos:
-%   \consolespan{cd /}      => $ cd /
-%   \consolespan*{cd /}     => cd /
-%   \consolespan[\#]{cd /}  => # cd /
-%   \consolespan[$>$]{cd /} => > cd /
-\DeclareTotalTCBox{\consolespan}{ s O{\$} m }
+%   \consolespan{cd /}       => $ cd /
+%   \consolespan[]{cd /}     => cd /
+%   \consolespan[\# ]{cd /}  => # cd /
+%   \consolespan[> ]{cd /}   => > cd /
+\DeclareTotalTCBox{\consolespan}{ O{$ } m }%$
 {verbatim,colupper=white,colback=\consolecolback,colframe=\consolecolframe,leftright skip=1mm}
-{\IfBooleanTF {#1}{}{{\color{\consolecolprompt}#2}} \mintinline[style=vim]{sh}{#3}}
+{\mintinline[style=vim]{sh}{#1#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OTROS COMANDOS
@@ -735,7 +734,7 @@ class Articulos extends CI_Controller
 
 Aquí, el ref es \ref{otra} y la página es \pageref{otra}.
 
-Ésto es <<parte>> de código PHP \phpspan{echo "hola";} directamente. También podemos escribir código de consola \consolespan{cd /}.
+Ésto es <<parte>> de código... \phpspan{echo "hola";} \consolespan{ls -lr}.
 
 \section{URIs}
 
