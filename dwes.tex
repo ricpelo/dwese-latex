@@ -54,6 +54,11 @@
 \setlist{noitemsep}
 \setsecheadstyle{\color{blue}\Large\bfseries\memRTLraggedright}
 
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RETOQUES DE LA CLASE MEMOIR
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -326,6 +331,7 @@
 
 \mlistadosimplenodes{phpsimplenodes}{php}{}{startinline}
 \mlistadosimplenodes{htmlphpsimplenodes}{html+php}{}{}
+\mlistadosimplenodes{httpsimplenodes}{http}{}{escapeinside=||,mathescape=true}
 \mlistadosimplenodes{shellsessionnocounter}{console}%
     {run system command={./session.sh temporal.txt},
      listing file={temporal.txt},
@@ -359,6 +365,10 @@
 \DeclareDocumentEnvironment{htmlphpsimple}{ s O{} O{} }
 {\IfBooleanTF{#1}{\htmlphpsimplenodes[#2][#3]}{\htmlphpsimpledes[#2][#3]}}
 {\IfBooleanTF{#1}{\endhtmlphpsimplenodes}{\endhtmlphpsimpledes}}
+
+\DeclareDocumentEnvironment{httpsimple}{ s O{} O{} }
+{\httpsimplenodes[#2][#3]}
+{\endhttpsimplenodes}
 
 \DeclareDocumentEnvironment{shellsession}{ s O{} O{} }
 {\IfBooleanTF{#1}{\shellsessionnocounter[#2][#3]}{\shellsessioncounter[#2][#3]}}
@@ -891,7 +901,7 @@ Server: Apache /2.2.3
 Content-Type: text/html; charset=utf-8
 Content-Length: 1539
 \(\dlsh\)
-blablabla...                (\emph{así hasta 1539 bytes)}
+blablabla...                (\(\emph{así hasta 1539 bytes}\))
 \end{codigo}
 
 \subsection{Cabeceras (\emph{headers}) de las responses}
@@ -900,22 +910,22 @@ Algunas cabeceras:
 
 \begin{itemize}
     \item \texttt{\textbf{Set-Cookie:} PHPSESSID=12313abcbd123}
-    \item \texttt{\textbf{Location:} index.php \(\leftarrow\) \emph{Para
-        redirecciones}}
-    \item \texttt{\textbf{Expires:} \(\leftarrow\) \emph{El tiempo de
-        vida válido de la página (para cachés)}}
+    \item \texttt{\textbf{Location:} index.php} \(\leftarrow\) \emph{Para
+        redirecciones}
+    \item \texttt{\textbf{Expires:}} \(\leftarrow\) \emph{El tiempo de
+        vida válido de la página (para cachés)}
 \end{itemize}
 
 Ejemplo de envío de parámetros mediante \emph{POST}:
 
-\begin{codigo}
+\begin{minted}[highlightlines=3]{http}
 POST /shop/28/Shop.aspx HTTP/1.1
 Host: mdsec.net
-\(\textbf{Content-Type: application/x-www-form-urlencoded}\)
+Content-Type: application/x-www-form-urlencoded
 Content-Length: 20
-\(\dlsh\)
-quantity=1\&price=449
-\end{codigo}
+
+quantity=1&price=449
+\end{minted}
 
 \section{Códigos de estado (\emph{status codes})}
 
