@@ -9,14 +9,14 @@
 \usepackage{ifxetex}
 \ifxetex
     \usepackage{fontspec}
-    %\setmainfont{DejaVu Serif}
+    %\usepackage{libertine}
     \setmonofont[
-        Path=/home/ricardo/.local/share/fonts/,
-        BoldFont=Inconsolata Bold for Powerline.ttf,
+        Path=fonts/,
+        BoldFont=FiraMono-Bold.ttf,
         AutoFakeSlant,
         BoldItalicFeatures={FakeSlant},
         Scale=MatchLowercase
-    ]{Inconsolata-g for Powerline.otf}
+    ]{FiraMono-Medium.ttf}
     \def\codigofontsize{\small}
     \usepackage{polyglossia}
     \setmainlanguage{spanish}
@@ -50,6 +50,7 @@
 
 \setminted{fontsize=\codigofontsize}
 \setlist{noitemsep}
+\setsecheadstyle{\color{blue}\Large\bfseries\memRTLraggedright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RETOQUES DE LA CLASE MEMOIR
@@ -601,9 +602,9 @@ Free Documentation License\textquotedbl{} on this book.
     \hbox to \@pnumwidth{{\cftchapterpagefont #1}}}
 \makeatother
 
-\renewcommand{\cftpartleader}{\textperiodcentered}
+\renewcommand{\cftpartleader}{ \textperiodcentered\ }
 \renewcommand{\cftpartafterpnum}{\cftparfillskip}
-\renewcommand{\cftchapterleader}{\textperiodcentered}
+\renewcommand{\cftchapterleader}{ \textperiodcentered\ }
 \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
 \renewcommand{\cftpartaftersnum}{.}
 \renewcommand*\cftpartindent{0em}
@@ -671,8 +672,9 @@ Free Documentation License\textquotedbl{} on this book.
 
 \chapter{Introducción a la tecnología web}
 
+\chapterprecishere{Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello.}
+
 \texttt{a}a\texttt{b}b\texttt{c}c\texttt{d}d\texttt{e}e\texttt{1}1\texttt{2}2
-%\chapterprecishere{Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello. Donde se habla de ésto y de aquello.}
 
 \section{Prueba}
 
@@ -684,9 +686,10 @@ Número \texttt{123456789,0} \texttt{\bfseries{123456789,0}} $123456789,0$.
 
 \lipsum[1]
 
-\begin{htmlphp}%[Prueba][label=etiqueta,breakable]
 00000000011111111112222222222333333333344444444445555555555666666666677777777778
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+\begin{htmlphp}[Prueba][label=etiqueta,breakable]
 <html>
     <body><?php
         class Articulos extends CI_Controller
@@ -906,7 +909,7 @@ Ejemplo de envío de parámetros mediante \emph{POST}:
 \begin{codigo}
 POST /shop/28/Shop.aspx HTTP/1.1
 Host: mdsec.net
-\textbf{Content-Type: application/x-www-form-urlencoded}
+\(\textbf{Content-Type: application/x-www-form-urlencoded}\)
 Content-Length: 20
 \(\dlsh\)
 quantity=1\&price=449
@@ -960,7 +963,7 @@ lo que permite que el cliente pueda enviar más requests usando la
 misma conexión:
 
 \begin{codigo}
-{\bfseries\mintinline{sh}{$ telnet www.ejemplo.com 80}}
+{\bfseries\mintinline{console}{$ telnet www.ejemplo.com 80}}
 GET /hola HTTP/1.0
 Host: www.ejemplo.com
 \(\dlsh\)
