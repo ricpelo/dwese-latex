@@ -40,7 +40,9 @@
     \usepackage[utf8]{inputenc}
     \usepackage[spanish,es-lcroman,es-noindentfirst]{babel}
 \fi
-\usepackage{color,graphicx}
+\usepackage{array,tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor,graphicx}
 \usepackage[xparse,minted,skins,breakable]{tcolorbox}
 \usepackage[unicode,pdfpagelabels,pdfencoding=auto,colorlinks,linkcolor=blue]{hyperref}
 \usepackage{lipsum}
@@ -934,24 +936,14 @@ Significado de los códigos:
     \item \texttt{5**}: Hay un error en la parte del servidor
 \end{itemize}
 
-\begin{center}
-\begin{tabular}{|c|c|}
-    \hline 
-    \textbf{GET} & \textbf{POST}\\
-    \hline 
-    \hline 
-    Parámetros en la URL & Parámetros en el cuerpo\\
-    \hline 
-    Usado para recuperar documentos & Usado para actualizar datos\\
-    \hline 
-    Longitud máxima en la URL & Sin longitud máxima\\
-    \hline 
-    Se puede cachear & No se puede cachear\\
-    \hline 
-    No debería cambiar nada en el servidor & Puede cambiar cosas en el servidor\\
-    \hline 
-\end{tabular}
-\end{center}
+\begin{tcolorbox}[tabularx={X|X}]
+\textbf{GET} & \textbf{POST}\\\hline\hline
+Parámetros en la URL & Parámetros en el cuerpo\\\hline
+Usado para recuperar documentos & Usado para actualizar datos\\\hline
+Longitud máxima en la URL & Sin longitud máxima\\\hline
+Se puede cachear & No se puede cachear\\\hline
+No debería cambiar nada en el servidor & Puede cambiar cosas en el servidor\\\hline
+\end{tcolorbox}
 
 \section{Pruebas}
 
