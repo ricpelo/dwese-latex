@@ -272,6 +272,19 @@
     ##2}
 }
 
+\DeclareDocumentCommand{\mlistado}{ m m m m O{} }{%
+\DeclareTCBListing[#5]{#1}{ s O{} O{} }{%
+    listing engine=minted,
+    minted language=#2,
+    minted options={fontsize=\codigofontsize,#4,##3},
+    listing only,
+    top=2.5mm,
+    bottom=2.2mm,
+    breakable,
+    #3,
+    ##2}
+}
+
 % Macro que define una plantilla para crear cajas de listados de código
 % que se cargan desde un archivo:
 \newcommand{\mlistadoinput}[5]{%
@@ -385,6 +398,7 @@
 % #2 : Opciones adicionales para \tcolorbox
 
 \mcodigo{codigo}{}
+\mlistado{listado}{http}{}{}
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \tcolorbox]
@@ -877,10 +891,10 @@ método  ruta    versión
 \end{itemize}
 
 Un ejemplo completo, con la cabecera \texttt{Host}:
-\begin{codigo}
+\begin{listado}
 GET /hola HTTP/1.1
 Host: www.ejemplo.com
-\end{codigo}
+\end{listado}
 
 \subsection{Cabeceras (\emph{headers}) de las requests}
 
