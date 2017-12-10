@@ -49,6 +49,7 @@
 \usepackage{mathabx}
 \usepackage{alltt}
 \usepackage{enumitem}
+\usepackage{wrapfig}
 
 \setminted{fontsize=\codigofontsize}
 \setlist{noitemsep}
@@ -149,7 +150,7 @@
 % - Genera un archivo descargable directamente desde un enlace en el título.
 % - Usa un linter para comprobar la sintaxis del código.
 
-\newcommand{\mlistado}[6]{%
+\newcommand{\mcajalistado}[6]{%
 \DeclareTCBListing[use counter from=contador]{#1}{ O{\url{\thetcbcounter.#6}} O{} O{} }{%
     listing engine=minted,
     minted language=#3,
@@ -304,9 +305,9 @@
 % #5 : Opciones adicionales para minted
 % #6 : Extensión del archivo resultante
 
-\mlistado{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
-\mlistado{phpnoinline}{iphp}{php}{}{}{php}
-\mlistado{htmlphp}{htmlphp}{html+php}{}{}{php}
+\mcajalistado{php}{php}{php}{}{startinline,firstline=3,firstnumber=1}{php}
+\mcajalistado{phpnoinline}{iphp}{php}{}{}{php}
+\mcajalistado{htmlphp}{htmlphp}{html+php}{}{}{php}
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[título][opciones adicionales para \newtcblisting][opciones adicionales para minted]
@@ -409,13 +410,13 @@
     {center,width=0.9\linewidth,fonttitle=\large\bfseries,drop fuzzy shadow,
      IfBooleanTF={#1}
          {colback=green!5}%
-         {bicolor,sidebyside,lefthand width=2cm,colback=green!50!black!50,
+         {bicolor,lefthand width=2cm,colback=green!50!black!50,
           colbacklower=green!5},
      adjusted title=#2,
      #3}
     {\IfBooleanTF {#1}
         {}%
-        {\includegraphics[width=\linewidth]{iconos/#4}\tcblower}%
+        {\begin{wrapfigure}{l}{0.2\linewidth}\centering\includegraphics[width=0.2\textwidth]{iconos/#4}\end{wrapfigure}}%
      \small{#5}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
