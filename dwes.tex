@@ -53,7 +53,6 @@
 
 \setminted{fontsize=\codigofontsize}
 \setlist{noitemsep}
-\setsecheadstyle{\color{blue}\Large\bfseries\memRTLraggedright}
 
 \makeatletter
 \AtBeginEnvironment{minted}{\dontdofcolorbox}
@@ -85,6 +84,8 @@
    \afterchaptertitle % \par\nobreak \vskip 40\p@
   }}
 \makeatother
+
+\setsecheadstyle{\color{blue}\Large\bfseries\memRTLraggedright}
 
 %\renewcommand{\chaptitlefont}{\normalfont\fontsize{30}{35}\selectfont\bfseries\flushright}
 
@@ -398,10 +399,21 @@
 % #2 : Opciones adicionales para \tcolorbox
 
 \mcodigo{codigo}{}
-\mlistado{listado}{http}{}{}
 
 % Las líneas anteriores crean entornos con estas opciones:
 % \begin{entorno}[opciones adicionales para \tcolorbox]
+% \end{entorno}
+
+% Parámetros:
+% #1 : Nombre del entorno
+% #2 : Lenguaje para minted (o sea, el lexer para Pygmentize)
+% #3 : Opciones adicionales para \newtcblisting
+% #4 : Opciones adicionales para minted
+
+\mlistado{listado}{http}{}{}
+
+% Las líneas anteriores crean entornos con estas opciones:
+% \begin{entorno}[opciones adicionales para \newtcblisting][opciones adicionales para minted]
 % \end{entorno}
 
 % Parámetros:
@@ -430,7 +442,9 @@
      #3}
     {\IfBooleanTF {#1}
         {}%
-        {\begin{wrapfigure}{l}{0.2\linewidth}\centering\includegraphics[width=0.2\textwidth]{iconos/#4}\end{wrapfigure}}%
+        {\begin{wrapfigure}{l}{0.2\linewidth}%
+         \centering\includegraphics[width=0.2\textwidth]{iconos/#4}%
+        \end{wrapfigure}}%
      \small{#5}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
